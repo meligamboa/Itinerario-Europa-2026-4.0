@@ -1,0 +1,3514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Europa 2026 — Itinerario Completo · París · Londres · Liverpool · Escocia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --dark: #1a1a1a;
+    --border: #d4c9b0;
+    --muted: #6b7c74;
+
+    /* Paris */
+    --paris: #8b1a2f;
+    --paris-light: #f5eaed;
+    --paris-gold: #c9a84c;
+    --paris-time: #8b1a2f;
+
+    /* London */
+    --london: #1a3a5c;
+    --london-light: #e8eef5;
+    --london-gold: #4a90a4;
+    --london-time: #1a3a5c;
+
+    /* Liverpool */
+    --liverpool: #8b3a1a;
+    --liverpool-light: #f5ede8;
+    --liverpool-gold: #e8a030;
+
+    /* Scotland */
+    --scotland: #2d4a3e;
+    --scotland-light: #e8ede9;
+    --scotland-gold: #c9a84c;
+    --scotland-time: #2d4a3e;
+
+    /* Munich */
+    --munich: #4a2060;
+    --munich-light: #f0ebf5;
+    --munich-gold: #d4a840;
+
+    /* Lucerne */
+    --lucerne: #1a5c4a;
+    --lucerne-light: #e8f5f0;
+    --lucerne-gold: #40c4a0;
+
+    /* Paris2 */
+    --paris2: #5c2a1a;
+    --paris2-light: #f5ede8;
+    --paris2-gold: #e8c040;
+
+    /* Active dest */
+    --active: var(--scotland);
+    --active-light: var(--scotland-light);
+    --active-gold: var(--scotland-gold);
+    --active-time: var(--scotland-time);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'Libre Franklin', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ── MASTER HEADER ── */
+  .master-header {
+    background: #111;
+    color: #f5f0e8;
+    padding: 48px 40px 0;
+    text-align: center;
+  }
+
+  .master-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .master-header h1 em { color: var(--paris-gold); font-style: italic; }
+
+  .master-header .tagline {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+    margin-top: 8px;
+  }
+
+  .master-header .trip-dates {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
+    margin-top: 24px;
+    border: 1px solid rgba(245,240,232,0.15);
+    overflow: hidden;
+  }
+
+  .trip-dates span {
+    padding: 6px 12px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-right: 1px solid rgba(245,240,232,0.15);
+    color: rgba(245,240,232,0.6);
+  }
+
+  .trip-dates span:last-child { border-right: none; }
+  .trip-dates span em { color: var(--paris-gold); font-style: normal; }
+
+  /* ── TAB NAV ── */
+  .tab-nav {
+    display: flex;
+    background: #111;
+    margin-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .tab-nav::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    flex: 0 0 auto;
+    min-width: 80px;
+    padding: 12px 10px;
+    background: none;
+    border: none;
+    color: rgba(245,240,232,0.45);
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .tab-btn .tab-flag { font-size: 20px; }
+  .tab-btn .tab-dates { font-size: 8px; opacity: 0.6; letter-spacing: 0.5px; }
+
+  .tab-btn:hover { color: rgba(245,240,232,0.8); }
+  .tab-btn.active-paris { color: #f5f0e8; border-bottom-color: var(--paris); }
+  .tab-btn.active-london { color: #f5f0e8; border-bottom-color: var(--london-gold); }
+  .tab-btn.active-liverpool { color: #f5f0e8; border-bottom-color: var(--liverpool-gold); }
+  .tab-btn.active-scotland { color: #f5f0e8; border-bottom-color: var(--scotland-gold); }
+  .tab-btn.active-munich { color: #f5f0e8; border-bottom-color: var(--munich-gold); }
+  .tab-btn.active-lucerne { color: #f5f0e8; border-bottom-color: var(--lucerne-gold); }
+  .tab-btn.active-paris2 { color: #f5f0e8; border-bottom-color: var(--paris2-gold); }
+
+  /* ── DESTINATION SECTIONS ── */
+  .destination { display: none; }
+  .destination.active { display: block; }
+
+  /* ── DEST HEADER ── */
+  .dest-header {
+    padding: 40px 40px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dest-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent, transparent 20px,
+      rgba(255,255,255,0.025) 20px,
+      rgba(255,255,255,0.025) 21px
+    );
+  }
+
+  .paris .dest-header { background: var(--paris); color: var(--cream); }
+  .london .dest-header { background: var(--london); color: var(--cream); }
+  .liverpool .dest-header { background: var(--liverpool); color: var(--cream); }
+  .scotland .dest-header { background: var(--scotland); color: var(--cream); }
+  .munich .dest-header { background: var(--munich); color: var(--cream); }
+  .lucerne .dest-header { background: var(--lucerne); color: var(--cream); }
+  .paris2 .dest-header { background: var(--paris2); color: var(--cream); }
+
+  .dest-header .flag { font-size: 40px; margin-bottom: 12px; position: relative; }
+
+  .dest-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    position: relative;
+  }
+
+  .paris .dest-header h2 em { color: var(--paris-gold); font-style: italic; }
+  .london .dest-header h2 em { color: var(--london-gold); font-style: italic; }
+  .liverpool .dest-header h2 em { color: var(--liverpool-gold); font-style: italic; }
+  .scotland .dest-header h2 em { color: var(--scotland-gold); font-style: italic; }
+  .munich .dest-header h2 em { color: var(--munich-gold); font-style: italic; }
+  .lucerne .dest-header h2 em { color: var(--lucerne-gold); font-style: italic; }
+  .paris2 .dest-header h2 em { color: var(--paris2-gold); font-style: italic; }
+
+  .dest-header .dest-meta {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.55);
+    margin-top: 8px;
+    position: relative;
+  }
+
+  .dest-header .dest-badge {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 5px 18px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  .paris .dest-badge { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); color: var(--paris-gold); }
+  .london .dest-badge { background: rgba(74,144,164,0.15); border: 1px solid rgba(74,144,164,0.3); color: var(--london-gold); }
+  .liverpool .dest-badge { background: rgba(232,160,48,0.15); border: 1px solid rgba(232,160,48,0.3); color: var(--liverpool-gold); }
+  .scotland .dest-badge { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); color: var(--scotland-gold); }
+  .munich .dest-badge { background: rgba(212,168,64,0.15); border: 1px solid rgba(212,168,64,0.3); color: var(--munich-gold); }
+  .lucerne .dest-badge { background: rgba(64,196,160,0.15); border: 1px solid rgba(64,196,160,0.3); color: var(--lucerne-gold); }
+  .paris2 .dest-badge { background: rgba(232,192,64,0.15); border: 1px solid rgba(232,192,64,0.3); color: var(--paris2-gold); }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 36px 24px 80px;
+  }
+
+  /* ── DAY CARD ── */
+  .day {
+    margin-bottom: 44px;
+    border: 1px solid var(--border);
+    background: white;
+    overflow: hidden;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .day:nth-child(1) { animation-delay: 0.04s; }
+  .day:nth-child(2) { animation-delay: 0.08s; }
+  .day:nth-child(3) { animation-delay: 0.12s; }
+  .day:nth-child(4) { animation-delay: 0.16s; }
+  .day:nth-child(5) { animation-delay: 0.20s; }
+  .day:nth-child(6) { animation-delay: 0.24s; }
+  .day:nth-child(7) { animation-delay: 0.28s; }
+
+  .day-header {
+    color: var(--cream);
+    padding: 16px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .paris .day-header { background: var(--paris); }
+  .london .day-header { background: var(--london); }
+  .liverpool .day-header { background: var(--liverpool); }
+  .scotland .day-header { background: var(--scotland); }
+  .munich .day-header { background: var(--munich); }
+  .lucerne .day-header { background: var(--lucerne); }
+  .paris2 .day-header { background: var(--paris2); }
+
+  .day-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    min-width: 40px;
+  }
+
+  .paris .day-number { color: var(--paris-gold); }
+  .london .day-number { color: var(--london-gold); }
+  .liverpool .day-number { color: var(--liverpool-gold); }
+  .scotland .day-number { color: var(--scotland-gold); }
+  .munich .day-number { color: var(--munich-gold); }
+  .lucerne .day-number { color: var(--lucerne-gold); }
+  .paris2 .day-number { color: var(--paris2-gold); }
+
+  .day-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.25;
+  }
+
+  .day-info .day-date {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+    margin-top: 2px;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .timeline-item:last-child { border-bottom: none; }
+
+  .time-col {
+    padding: 14px 14px 14px 18px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+
+  .paris .time-col { background: var(--paris-light); }
+  .london .time-col { background: var(--london-light); }
+  .liverpool .time-col { background: var(--liverpool-light); }
+  .scotland .time-col { background: var(--scotland-light); }
+  .munich .time-col { background: var(--munich-light); }
+  .lucerne .time-col { background: var(--lucerne-light); }
+  .paris2 .time-col { background: var(--paris2-light); }
+
+  .time {
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .paris .time { color: var(--paris); }
+  .london .time { color: var(--london); }
+  .liverpool .time { color: var(--liverpool); }
+  .scotland .time { color: var(--scotland); }
+  .munich .time { color: var(--munich); }
+  .lucerne .time { color: var(--lucerne); }
+  .paris2 .time { color: var(--paris2); }
+
+  .duration {
+    font-size: 9px;
+    color: var(--muted);
+    margin-top: 2px;
+    text-align: right;
+  }
+
+  .content-col { padding: 13px 18px; }
+
+  .item-type {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 3px;
+  }
+
+  .type-drive { color: #7a8f7a; }
+  .type-food { color: #c9773a; }
+  .type-visit { color: #4a6fa5; }
+  .type-hotel { color: #2d4a3e; }
+  .type-transport { color: #9b59b6; }
+
+  .item-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--dark);
+    line-height: 1.3;
+  }
+
+  .item-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-top: 3px;
+    line-height: 1.5;
+  }
+
+  .item-note {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 11px;
+    border-left: 2px solid;
+    padding: 3px 8px;
+    line-height: 1.4;
+  }
+
+  .paris .item-note { background: rgba(139,26,47,0.05); border-color: var(--paris); color: #7a1525; }
+  .london .item-note { background: rgba(26,58,92,0.05); border-color: var(--london-gold); color: #1a3a5c; }
+  .liverpool .item-note { background: rgba(139,58,26,0.05); border-color: var(--liverpool-gold); color: #7a3a10; }
+  .scotland .item-note { background: rgba(201,168,76,0.08); border-color: var(--scotland-gold); color: #8a6f2e; }
+  .munich .item-note { background: rgba(74,32,96,0.05); border-color: var(--munich-gold); color: #4a2060; }
+  .lucerne .item-note { background: rgba(26,92,74,0.05); border-color: var(--lucerne-gold); color: #1a5c4a; }
+  .paris2 .item-note { background: rgba(92,42,26,0.05); border-color: var(--paris2-gold); color: #5c2a1a; }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 8px 18px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+  }
+
+  .paris .section-label { background: rgba(139,26,47,0.04); }
+  .london .section-label { background: rgba(26,58,92,0.04); }
+  .liverpool .section-label { background: rgba(139,58,26,0.04); }
+  .scotland .section-label { background: var(--scotland-light); }
+  .munich .section-label { background: rgba(74,32,96,0.04); }
+  .lucerne .section-label { background: rgba(26,92,74,0.04); }
+  .paris2 .section-label { background: rgba(92,42,26,0.04); }
+
+  /* ── DAY NOTES ── */
+  .day-notes {
+    padding: 10px 18px;
+    font-size: 11.5px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    background: rgba(0,0,0,0.02);
+  }
+
+  .day-notes strong { color: var(--dark); }
+
+  /* ── TRANSPORT BOX ── */
+  .transport-box {
+    margin: 0 18px 14px;
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    font-size: 12px;
+    background: rgba(155,89,182,0.04);
+    border-left: 3px solid #9b59b6;
+  }
+
+  .transport-box strong { color: #7d3c98; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; display: block; margin-bottom: 4px; }
+
+  /* ── OPTIONAL BADGE ── */
+  .optional {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: rgba(201,168,76,0.12);
+    color: #8a6f2e;
+    padding: 1px 6px;
+    margin-left: 6px;
+    vertical-align: middle;
+    border: 1px solid rgba(201,168,76,0.3);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #111;
+    color: rgba(245,240,232,0.45);
+    text-align: center;
+    padding: 28px;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  footer span { color: var(--paris-gold); }
+
+  @media (max-width: 600px) {
+    .master-header h1 { font-size: 30px; }
+    .dest-header h2 { font-size: 26px; }
+    .tab-btn { font-size: 10px; padding: 12px 4px; }
+    .timeline-item { grid-template-columns: 70px 1fr; }
+    .trip-dates { flex-direction: column; gap: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════ MASTER HEADER ══════════════════════════════════ -->
+<div class="master-header">
+  <h1>Europa <em>en familia</em></h1>
+  <p class="tagline">Itinerario completo · 13 viajeros · Julio 2026</p>
+  <div class="trip-dates">
+    <span>🇫🇷 París <em>5–8 Jul</em></span>
+    <span>🇬🇧 Londres <em>8–12 Jul</em></span>
+    <span>🎸 Liverpool <em>12–14 Jul</em></span>
+    <span>🏴󠁧󠁢󠁳󠁣󠁴󠁧 Escocia <em>14–23 Jul</em></span>
+    <span>🇩🇪 Múnich <em>23–25 Jul</em></span>
+    <span>🇨🇭 Lucerna <em>25–31 Jul</em></span>
+    <span>🇫🇷 París <em>31 Jul–2 Ago</em></span>
+  </div>
+
+  <nav class="tab-nav">
+    <button class="tab-btn" onclick="showDest('paris')" id="btn-paris">
+      <span class="tab-flag">🇫🇷</span>
+      <span>París</span>
+      <span class="tab-dates">5–8 Jul</span>
+    </button>
+    <button class="tab-btn" onclick="showDest('london')" id="btn-london">
+      <span class="tab-flag">🇬🇧</span>
+      <span>Londres</span>
+      <span class="tab-dates">8–12 Jul</span>
+    </button>
+    <button class="tab-btn" onclick="showDest('liverpool')" id="btn-liverpool">
+      <span class="tab-flag">🎸</span>
+      <span>Liverpool</span>
+      <span class="tab-dates">12–14 Jul</span>
+    </button>
+    <button class="tab-btn" onclick="showDest('scotland')" id="btn-scotland">
+      <span class="tab-flag">🏴󠁧󠁢󠁳󠁣󠁴󠁧</span>
+      <span>Escocia</span>
+      <span class="tab-dates">14–23 Jul</span>
+    </button>
+    <button class="tab-btn" onclick="showDest('munich')" id="btn-munich">
+      <span class="tab-flag">🇩🇪</span>
+      <span>Múnich</span>
+      <span class="tab-dates">23–25 Jul</span>
+    </button>
+    <button class="tab-btn" onclick="showDest('lucerne')" id="btn-lucerne">
+      <span class="tab-flag">🇨🇭</span>
+      <span>Lucerna</span>
+      <span class="tab-dates">25–31 Jul</span>
+    </button>
+    <button class="tab-btn" onclick="showDest('paris2')" id="btn-paris2">
+      <span class="tab-flag">🎂</span>
+      <span>París Final</span>
+      <span class="tab-dates">31 Jul–2 Ago</span>
+    </button>
+  </nav>
+  <div style="background:#111; text-align:center; padding:4px 0 8px; font-size:9px; color:rgba(245,240,232,0.25); letter-spacing:1px;">← DESLIZA PARA VER TODOS LOS DESTINOS →</div>
+</div>
+
+<!-- ══════════════════════════════════ PARIS ══════════════════════════════════ -->
+<div class="destination paris" id="dest-paris">
+  <div class="dest-header">
+    <div class="flag">🇫🇷</div>
+    <h2>París, <em>la Ciudad Luz</em></h2>
+    <p class="dest-meta">Hotel Serotel Lutece · Barrio Latino · 5–8 julio</p>
+    <div class="dest-badge">4 días · 3 noches</div>
+  </div>
+
+  <main>
+
+    <!-- DÍA 1 PARIS -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">01</div>
+        <div class="day-info">
+          <h3>Llegada + Barrio Latino + Saint-Germain</h3>
+          <div class="day-date">5 de julio · Primer día en París</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">✈️ Llegada</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">✈️ Llegada</div>
+            <div class="item-title">Llegada a París</div>
+            <div class="item-desc">Aterrizaje y trámites de llegada. Traslado al hotel en el Barrio Latino.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">11:45</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-hotel">🏨 Hotel</div>
+            <div class="item-title">Hotel Serotel Lutece — Dejar maletas</div>
+            <div class="item-desc">Check-in anticipado o dejar equipaje. Ubicado en el corazón del Barrio Latino, a pasos de Notre Dame.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Almuerzo</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">12:15</span><span class="duration">1h 15</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Almuerzo</div>
+            <div class="item-title">Le Petit Châtelet</div>
+            <div class="item-desc">Bistró francés clásico frente a Notre Dame. Ambiente parisino auténtico, cocina tradicional. Perfecto para el primer almuerzo en París.</div>
+            <div class="item-note">📋 Reservar con antelación para 13 personas.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🚶 Tarde — Barrio Latino</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:30</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🚶 Paseo</div>
+            <div class="item-title">Notre Dame · Shakespeare and Company · Île Saint-Louis</div>
+            <div class="item-desc">Paseo a pie por el corazón histórico de París. Notre Dame (en restauración exterior), la librería más famosa del mundo, y el helado Berthillon en la Île Saint-Louis — obligatorio.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:00</span><span class="duration">2h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-hotel">🛏️ Descanso</div>
+            <div class="item-title">Check-in y descanso en el hotel</div>
+            <div class="item-desc">Check-in oficial y descanso. El primer día viajando con niños conviene no saturar la tarde.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌆 Tarde — Saint-Germain</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">17:30</span><span class="duration">2h 15</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🌿 Paseo</div>
+            <div class="item-title">Jardines de Luxemburgo · Saint-Sulpice · Café en Saint-Germain</div>
+            <div class="item-desc">Los jardines más bonitos de París para que los niños corran. La imponente iglesia de Saint-Sulpice. Café o aperitivo en las terrazas de Saint-Germain-des-Prés.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Cena</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:45</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena</div>
+            <div class="item-title">La Jacobine — Saint-Germain</div>
+            <div class="item-desc">Restaurante clásico parisino en el corazón de Saint-Germain. Crêpes, fondues y cocina francesa tradicional. Muy buena opción para un grupo con niños.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">21:15</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-hotel">🌙 Regreso</div>
+            <div class="item-title">Regreso al hotel</div>
+            <div class="item-desc">A pie o en metro — el hotel está a pocos minutos.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 2 PARIS -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">02</div>
+        <div class="day-info">
+          <h3>Disneyland París — Día completo</h3>
+          <div class="day-date">6 de julio · El día de los niños</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">7:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno temprano en el hotel</div>
+            <div class="item-desc">Salida temprana para aprovechar el máximo de horas en el parque antes de las multitudes.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:00</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚆 Traslado</div>
+            <div class="item-title">Hotel → Disneyland París</div>
+            <div class="item-desc">RER A desde Châtelet-Les Halles hasta Marne-la-Vallée. ~45 min. O taxi/Uber ~45-60 min para el grupo.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:00</span><span class="duration">4h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🎢 Parque</div>
+            <div class="item-title">Disneyland París — Mañana</div>
+            <div class="item-desc">Aprovechar las primeras horas con menos cola: Space Mountain, Big Thunder Mountain, Pirates of the Caribbean, Haunted Mansion. Fantasyland para los más pequeños. Usar Lightning Lane para las atracciones más populares.</div>
+            <div class="item-note">✅ ENTRADAS YA COMPRADAS · ✅ LIGHTNING LANE YA COMPRADO · Activar la app de Disneyland París antes de entrar para gestionar los Lightning Lane.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Comida</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">14:00</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍔 Comida</div>
+            <div class="item-title">Comida dentro del parque</div>
+            <div class="item-desc">Varios restaurantes temáticos disponibles. El Plaza Gardens o Agrabah Café son buenas opciones para grupos. También hay zonas de picnic si llevan comida.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🎉 Tarde y noche</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🎠 Parque</div>
+            <div class="item-title">Disneyland París — Tarde</div>
+            <div class="item-desc">Continuar con las atracciones pendientes. Por la tarde el parque se anima con los desfiles y shows temáticos. Indiana Jones, Star Wars Hyperspace Mountain.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">Noche</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">✨ Show Opcional</div>
+            <div class="item-title">Disney Illuminations — Show nocturno <span class="optional">Opcional</span></div>
+            <div class="item-desc">Fuegos artificiales y proyecciones sobre el Castillo de la Bella Durmiente. Si el grupo tiene energía, es uno de los mejores momentos del viaje. Si no, se puede salir antes y regresar más descansados.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">21:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚗 Regreso</div>
+            <div class="item-title">Disneyland → Hotel — Uber/Taxi privado reservado</div>
+            <div class="item-desc">Regreso en taxi privado o Uber reservado con antelación para el grupo — mucho más cómodo que el RER a esa hora con niños cansados. Si se ve el show, salir ~23:00. Si no, salir ~21:30.</div>
+            <div class="item-note">💡 Reservar el taxi de regreso desde la mañana — hay alta demanda a la salida del parque.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 3 PARIS -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">03</div>
+        <div class="day-info">
+          <h3>Catacumbas + Torre Eiffel + Trocadero</h3>
+          <div class="day-date">7 de julio · Los grandes iconos</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno en el hotel o boulangerie</div>
+            <div class="item-desc">Croissants y café parisino. Una boulangerie del barrio es la experiencia auténtica si el hotel no incluye desayuno.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">11:00</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">💀 Visita</div>
+            <div class="item-title">Las Catacumbas de París</div>
+            <div class="item-desc">El osario subterráneo de París con 6 millones de restos. Una de las visitas más impactantes y únicas de Europa. Los adolescentes lo adorarán. Temperatura constante de 14°C — llevar algo de abrigo.</div>
+            <div class="item-note">🎟️ RESERVAR ENTRADAS ONLINE con antelación. Las colas sin reserva pueden ser de horas. Mínimo 10 años recomendado para los más pequeños.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Almuerzo</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:00</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Almuerzo</div>
+            <div class="item-title">Comida en Montparnasse</div>
+            <div class="item-desc">El barrio de Montparnasse tiene excelentes brasseries y bistrós. La Coupole o cualquier terraza de Boulevard du Montparnasse son perfectas para un almuerzo tranquilo.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🗼 Tarde — Torre Eiffel</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">16:00</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🌿 Paseo</div>
+            <div class="item-title">Campo de Marte</div>
+            <div class="item-desc">El gran parque frente a la Torre Eiffel. Perfecto para que los niños corran, hacer fotos y disfrutar de las vistas de la torre desde abajo. Los parisinos hacen picnic aquí.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">17:30</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">📸 Mirador</div>
+            <div class="item-title">Trocadero — La foto de París</div>
+            <div class="item-desc">El mirador más fotogénico de la Torre Eiffel, desde el otro lado del Sena. La foto clásica de París desde el Palais de Chaillot. Al atardecer la torre se ilumina.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Cena</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena</div>
+            <div class="item-title">Cena en zona Trocadero / Eiffel</div>
+            <div class="item-desc">Varios restaurantes con vistas a la torre. A las 22:00 la Torre Eiffel destella durante 5 minutos — si se quedan en la zona, el espectáculo es mágico.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">21:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-hotel">🌙 Regreso</div>
+            <div class="item-title">Regreso al hotel</div>
+            <div class="item-desc">Metro línea 9 o Uber. Última noche completa en París.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 4 PARIS -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">04</div>
+        <div class="day-info">
+          <h3>Salida hacia Londres — Eurostar</h3>
+          <div class="day-date">8 de julio · París → Londres</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">7:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno temprano en el hotel</div>
+            <div class="item-desc">Último desayuno en París. Check-out y preparar maletas antes de salir.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:30</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🚶 Opcional</div>
+            <div class="item-title">Tiempo libre cerca del hotel <span class="optional">Opcional</span></div>
+            <div class="item-desc">Último café parisino, paseo por el mercado del Barrio Latino o compras de última hora. Sin prisas pero con el ojo en el reloj.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:15</span><span class="duration">25 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚗 Traslado</div>
+            <div class="item-title">Hotel Serotel Lutece → Gare du Nord</div>
+            <div class="item-desc">Uber recomendado para el grupo con maletas. 20-30 min según tráfico.</div>
+            <div class="item-note">⚠️ Llegar a la estación con al menos 1h 15 min antes del tren — el Eurostar requiere control de pasaportes y equipaje.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:45</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚂 Eurostar</div>
+            <div class="item-title">Llegada recomendada a Gare du Nord</div>
+            <div class="item-desc">Check-in del tren, control de pasaportes francés y británico, y embarque. El proceso para grupos grandes puede tomar tiempo.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">12:00</span><span class="duration">2h 20</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚆 Eurostar</div>
+            <div class="item-title">París Gare du Nord → Londres St. Pancras</div>
+            <div class="item-desc">El tren más elegante de Europa. A través del Canal de la Mancha por el Eurotúnel. Llegada a St. Pancras International ~14:20h (hora local Londres, -1h vs París).</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>🕐 Hora local:</strong> Recuerda que Londres tiene -1h respecto a París. El tren sale a las 12:00 París y llega ~14:20 Londres.</div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ══════════════════════════════════ LONDON ══════════════════════════════════ -->
+<div class="destination london" id="dest-london">
+  <div class="dest-header">
+    <div class="flag">🇬🇧</div>
+    <h2>Londres, <em>la Gran Ciudad</em></h2>
+    <p class="dest-meta">Park Plaza Victoria London · 8–12 julio · Desayuno incluido</p>
+    <div class="dest-badge">4 días · 4 noches</div>
+  </div>
+
+  <main>
+
+    <!-- DÍA 1 LONDON -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">01</div>
+        <div class="day-info">
+          <h3>Llegada + Westminster · Big Ben · London Eye</h3>
+          <div class="day-date">8 de julio · Primer día en Londres · Relax</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">🚆 Llegada desde París</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">~14:20</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚆 Llegada</div>
+            <div class="item-title">St. Pancras International — Llegada Eurostar</div>
+            <div class="item-desc">Llegada a Londres. La estación de St. Pancras es de las más bonitas de Europa — vale la pena detenerse un momento.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">~14:30</span><span class="duration">30 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚇 Traslado</div>
+            <div class="item-title">St. Pancras → Park Plaza Victoria</div>
+            <div class="item-desc">Uber £12-20 (20-30 min) o Metro Victoria Line desde King's Cross (~25 min, £3-5). Uber recomendado para el grupo con maletas.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">~15:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-hotel">🏨 Hotel</div>
+            <div class="item-title">Park Plaza Victoria — Check-in</div>
+            <div class="item-desc">Ubicado en Victoria, zona privilegiada y muy bien conectada. Dejar maletas y descanso breve.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🚶 Tarde — Westminster a pie</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">16:00</span><span class="duration">2h+</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🚶 Paseo</div>
+            <div class="item-title">Big Ben · Parlamento · London Eye · Trafalgar Square</div>
+            <div class="item-desc">Todo a pie desde el hotel. Big Ben y el Parlamento sobre el Támesis, el London Eye y Trafalgar Square para cerrar.</div>
+            <div class="item-note">✅ LONDON EYE — Entrada Flexi + Fast Track ya comprada. Sin colas, acceso directo. Ir cuando quieran en el bloque de tarde.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">16:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🐠 Opcional</div>
+            <div class="item-title">SEA LIFE London Aquarium <span class="optional">Opcional niños</span></div>
+            <div class="item-desc">Junto al London Eye. Tiburones, rayas y la colección de pingüinos. Muy bueno para los más pequeños.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Cena</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena — Sin reserva</div>
+            <div class="item-title">Giraffe — cerca del hotel</div>
+            <div class="item-desc">Casual, muy kid-friendly, menú variado internacional. Sin dress code. Varios locales cerca de Victoria.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">Pizza Express — Westminster</div>
+            <div class="item-desc">Clásico británico, siempre bueno para grupos con niños. Ambiente relajado y sin dress code. Reservar para 13 personas.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 2 LONDON -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">02</div>
+        <div class="day-info">
+          <h3>Buckingham · Hamleys · Paradox Museum · Covent Garden</h3>
+          <div class="day-date">9 de julio · El día más completo</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno en el hotel (incluido)</div>
+            <div class="item-desc">Desayuno inglés completo. Full English breakfast: bacon, eggs, sausages, beans, toast. Una tradición que hay que vivir.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">11:00</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">👑 Visita</div>
+            <div class="item-title">Buckingham Palace · St James's Park</div>
+            <div class="item-desc">La residencia oficial del Rey Carlos III. Interior del palacio con los apartamentos de Estado, el Salón de Baile y las colecciones reales. Paseo por St James's Park después.</div>
+            <div class="item-note">✅ ENTRADA AL BUCKINGHAM PALACE ya comprada a las 11:00 AM · Cambio de Guardia: verificar en householddivision.org.uk si hay ceremonia ese día.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Almuerzo</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:00</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Almuerzo — Sin reserva</div>
+            <div class="item-title">Shake Shack — zona centro</div>
+            <div class="item-desc">Hamburguesas premium, fácil con niños, sin reserva. Varios locales en Covent Garden y Soho.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">Dishoom — Covent Garden</div>
+            <div class="item-desc">Curry indio-iraní, uno de los mejores restaurantes de Londres. Imprescindible. Reservar online con bastante antelación — siempre hay cola sin reserva.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🎉 Tarde</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">14:30</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🧸 Visita</div>
+            <div class="item-title">Hamleys — La juguetería más famosa del mundo</div>
+            <div class="item-desc">7 plantas de juguetes en Regent Street. Demostraciones de productos, personajes de cuentos y la energía más divertida de Londres. Obligatorio con niños.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:30</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🎭 Visita</div>
+            <div class="item-title">Paradox Museum</div>
+            <div class="item-desc">Museo interactivo de ilusiones ópticas y paradojas visuales. Perfecto para adolescentes y adultos — muy fotogénico y divertido para toda la familia.</div>
+            <div class="item-note">🎟️ Reservar entradas online con antelación.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌇 Tarde — Covent Garden y Soho</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">17:00</span><span class="duration">2h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🎪 Ambiente</div>
+            <div class="item-title">Covent Garden · Soho · Leicester Square</div>
+            <div class="item-desc">Shows de artistas callejeros en Covent Garden, las tiendas y el ambiente nocturno de Soho, y Leicester Square con las marquesinas de los teatros. El corazón del West End londinense.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Cena</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena</div>
+            <div class="item-title">Flat Iron o The Ivy Market Grill — Covent Garden</div>
+            <div class="item-desc">Flat Iron: filete de ternera a precio increíble, ambiente informal y muy bueno. The Ivy Market Grill: más elegante, bello ambiente art deco, cocina británica sofisticada.</div>
+            <div class="item-note">📋 Ambos populares — reservar con antelación para 13 personas.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 3 LONDON -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">03</div>
+        <div class="day-info">
+          <h3>Chelsea FC Stadium Tour · Camden Town</h3>
+          <div class="day-date">10 de julio · Fútbol y música</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno en el hotel (incluido)</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:00</span><span class="duration">25 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚇 Traslado</div>
+            <div class="item-title">Hotel → Stamford Bridge (Chelsea FC)</div>
+            <div class="item-desc">Metro: District Line hasta Fulham Broadway (~25-30 min, £2.8-4). Uber £12-20 (20-30 min).</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">11:00</span><span class="duration">2h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">⚽ Tour</div>
+            <div class="item-title">Chelsea FC — Stadium Tour · Stamford Bridge</div>
+            <div class="item-desc">Tour por el estadio del Chelsea: vestuarios, túnel de jugadores, borde del campo y museo del club. Duración 1.5-2 horas.</div>
+            <div class="item-note">✅ ENTRADA AL TOUR YA COMPRADA para las 11:00 AM · chelseafc.com</div>
+          </div>
+        </div>
+
+        <div class="section-label">🎸 Tarde — Camden</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:00</span><span class="duration">15 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚇 Traslado</div>
+            <div class="item-title">Stamford Bridge → Camden Town</div>
+            <div class="item-desc">Metro: Fulham Broadway → Earl's Court → Camden Town (~15-20 min, £2.8-4). Uber £8-12 (10-15 min).</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:15</span><span class="duration">4h+</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🎸 Tarde</div>
+            <div class="item-title">Camden Town · Camden Market</div>
+            <div class="item-desc">El barrio más alternativo de Londres — mercado icónico con puestos de comida internacional, ropa vintage, arte y música. Los adolescentes lo van a adorar.</div>
+            <div class="item-note">💡 Camden Market ES la comida — pasta, burgers, postres de todo el mundo. Cada uno elige su puesto favorito. Sin reserva necesaria.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Cena y regreso</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena — Sin reserva</div>
+            <div class="item-title">Honest Burgers Camden — Sin reserva</div>
+            <div class="item-desc">Una de las mejores hamburgueserías de Londres, justo en Camden. Informal, sin dress code, muy bueno para el grupo después de un día activo.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">The Lockside Lounge — Terraza sobre el canal</div>
+            <div class="item-desc">Bar-restaurante con terraza sobre el Regent's Canal en Camden. Cocina variada, ambiente animado y vistas al canal. Reservar para 13 personas.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 4 LONDON -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">04</div>
+        <div class="day-info">
+          <h3>Museos Opcionales · Tower Bridge · The Shard</h3>
+          <div class="day-date">11 de julio · Historia, vistas y el gran final londinense</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana — Museos opcionales</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno en el hotel (incluido)</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:30</span><span class="duration">2h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🏛️ Opcional</div>
+            <div class="item-title">Imperial War Museum <span class="optional">Opcional</span></div>
+            <div class="item-desc">Uno de los mejores museos de Londres — colecciones de la WWI y WWII, tanques, aviones y exposiciones muy bien curadas. Gratis. Muy impactante para adolescentes. A 20 min del hotel en metro o Uber.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:30</span><span class="duration">2h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🏛️ Opcional</div>
+            <div class="item-title">Museum of London <span class="optional">Opcional</span></div>
+            <div class="item-desc">La historia completa de Londres desde la época romana hasta hoy — muy visual e interactivo, ideal para niños y adolescentes. Gratis. Cerca de la zona de Tower Bridge.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌉 Tarde — Tower Bridge y The Shard</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">12:00</span><span class="duration">20 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚇 Traslado</div>
+            <div class="item-title">Centro → Tower Bridge</div>
+            <div class="item-desc">Metro o Uber hasta Tower Bridge. ~20 min desde el hotel.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">12:30</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🌉 Visita</div>
+            <div class="item-title">Tower Bridge — Paseo y fotos <span class="optional">Entrada interior opcional</span></div>
+            <div class="item-desc">El puente más icónico de Londres. Cruzarlo a pie y fotos desde ambos lados — gratis. La entrada interior (torres de cristal y pasarela elevada) es opcional si el grupo quiere.</div>
+            <div class="item-note">🎟️ Entrada interior opcional: ~£12 adultos / £6 niños. Reservar en towerbridge.org.uk si se quiere visitar por dentro.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Almuerzo</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:30</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Almuerzo — Sin reserva</div>
+            <div class="item-title">Five Guys — zona Tower Bridge</div>
+            <div class="item-desc">Hamburguesas premium, fácil con niños, sin reserva. Varios locales cerca de la zona de Tower Bridge.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">Coppa Club — Iglús con vistas al Tower Bridge</div>
+            <div class="item-desc">Vistas increíbles al Tower Bridge desde sus iglús transparentes. Muy especial y fotogénico. Reservar para 13 personas con antelación.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌇 Tarde — The Shard</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">16:00</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🌇 Mirador</div>
+            <div class="item-title">The Shard — Atardecer desde las alturas 🔥</div>
+            <div class="item-desc">244m de altura. Vistas de 360° a toda Londres al atardecer. La visita más especial de Londres.</div>
+            <div class="item-note">✅ ENTRADA YA COMPRADA para las 4:00 PM · theviewfromtheshard.com</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Cena y noche</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena — Sin reserva</div>
+            <div class="item-title">Flat Iron — Covent Garden o London Bridge</div>
+            <div class="item-desc">Filete de ternera a precio increíble, ambiente muy informal, sin dress code. Varios locales en Londres. Sin reserva — llegar temprano.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">Oblix — Piso 32 del Shard</div>
+            <div class="item-desc">La cena más especial del viaje con vistas panorámicas a toda Londres. Cocina de calidad en el mismo edificio que acaban de visitar. Reservar con bastante antelación.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">Noche</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">⚡ Opcional</div>
+            <div class="item-title">Troubadour Bar — Bar de Iron Maiden <span class="optional">Opcional</span></div>
+            <div class="item-desc">El mítico bar de rock en Earl's Court. Para los más rockeros del grupo.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">~20:30</span><span class="duration">20 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚇 Regreso</div>
+            <div class="item-title">Shard → Hotel</div>
+            <div class="item-desc">Metro: London Bridge → Victoria (~15-25 min, £3-5). Uber £10-18 (10-20 min).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 5 LONDON -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">05</div>
+        <div class="day-info">
+          <h3>Salida hacia Liverpool — Adiós Londres</h3>
+          <div class="day-date">12 de julio · Londres → Liverpool</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Última mañana</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Último desayuno en el hotel (incluido)</div>
+            <div class="item-desc">Check-out del hotel. Dejar maletas en consigna si hay tiempo libre antes de salir.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">~9:30</span><span class="duration">20 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚇 Traslado</div>
+            <div class="item-title">Hotel → Estación de tren</div>
+            <div class="item-desc">Uber £12-20 (15-25 min) o Metro £3-5 (20-30 min). Destino: Euston Station para Liverpool.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">11:00</span><span class="duration">2h 10</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚆 Tren</div>
+            <div class="item-title">Londres Euston → Liverpool Lime Street</div>
+            <div class="item-desc">Avanti West Coast o LNER. ~2h 10 min. Liverpool es la cuna de The Beatles — ¡la próxima aventura!</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>📍 Próxima parada:</strong> Liverpool y luego Escocia · El viaje más épico continúa 🏴󠁧󠁢󠁳󠁣󠁴󠁧</div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ══════════════════════════════════ LIVERPOOL ══════════════════════════════════ -->
+<div class="destination liverpool" id="dest-liverpool">
+  <div class="dest-header">
+    <div class="flag">🎸</div>
+    <h2>Liverpool, <em>la ciudad de los Beatles</em></h2>
+    <p class="dest-meta">The Halyard Liverpool · Albert Dock · 12–14 julio</p>
+    <div class="dest-badge">2 días · 2 noches</div>
+  </div>
+
+  <main>
+
+    <!-- DÍA 1 LIVERPOOL -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">01</div>
+        <div class="day-info">
+          <h3>Llegada · Albert Dock · Beatles Story · Cavern Club</h3>
+          <div class="day-date">12 de julio · Llegada desde Londres</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">🚆 Llegada</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">14:02</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚆 Llegada</div>
+            <div class="item-title">Liverpool Lime Street — Llegada desde Londres</div>
+            <div class="item-desc">Llegada puntual a las 14:02. La estación está en el centro de Liverpool, todo muy accesible.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">14:15</span><span class="duration">15 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Lime Street → The Halyard Hotel</div>
+            <div class="item-desc">Uber o taxi ~10 min (£8-12). A pie ~15 min. El hotel está en Duke Street, muy cerca de Albert Dock.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">14:30</span><span class="duration">30 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-hotel">🏨 Hotel</div>
+            <div class="item-title">The Halyard Liverpool — Check-in y dejar maletas</div>
+            <div class="item-desc">Hotel moderno y elegante en el corazón de Liverpool. Check-in y dejar maletas para salir con las manos libres a explorar la ciudad.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌊 Tarde — Albert Dock</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:00</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🚶 Paseo</div>
+            <div class="item-title">Royal Albert Dock · Estatua de los Beatles</div>
+            <div class="item-desc">El complejo portuario más icónico de Liverpool. Paseo por el muelle histórico, la estatua de bronce de los Fab Four junto al Mersey, galerías, tiendas y vistas al río. La energía de la ciudad se siente aquí.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">16:15</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🎵 Visita</div>
+            <div class="item-title">The Beatles Story Museum</div>
+            <div class="item-desc">El museo más inmersivo de los Beatles en el mundo — desde los primeros días en Liverpool hasta la separación. Réplica del Cavern Club, el estudio Abbey Road y audioguía incluida. Imprescindible para fans de todas las edades.</div>
+            <div class="item-note">✅ ENTRADA YA COMPRADA para las 4:15 PM · beatlesstory.com</div>
+          </div>
+        </div>
+
+        <div class="section-label">🎸 Tarde-noche — Mathew Street</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">18:00</span><span class="duration">20 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚶 Traslado</div>
+            <div class="item-title">Albert Dock → The Cavern Club (Mathew Street)</div>
+            <div class="item-desc">A pie ~15-20 minutos por el centro de Liverpool.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">18:20</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🎶 Visita</div>
+            <div class="item-title">The Cavern Club — Mathew Street</div>
+            <div class="item-desc">El club más famoso de la historia de la música. Música en vivo todo el día, ladrillos cubiertos de nombres de artistas, la atmósfera del underground londinense. £5 entrada. Los Beatles tocaron aquí casi 300 veces.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:45</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🏮 Paseo</div>
+            <div class="item-title">Chinatown de Liverpool</div>
+            <div class="item-desc">El barrio chino más antiguo de Europa, a pocos minutos del Cavern Club. El arco imperial, restaurantes auténticos y el ambiente nocturno del barrio.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Cena</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">20:45</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena</div>
+            <div class="item-title">Cena en Chinatown o zona centro</div>
+            <div class="item-desc">Chinatown tiene excelentes restaurantes de cocina china y asiática. Alternativamente, las zonas de Bold Street o Mathew Street tienen infinidad de opciones para todos los gustos.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>💡 Nota:</strong> Día de llegada a las 14:02 — el itinerario de tarde está bien ajustado para aprovechar las horas de luz sin agotar al grupo tras el viaje en tren.</div>
+      </div>
+    </div>
+
+    <!-- DÍA 2 LIVERPOOL -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">02</div>
+        <div class="day-info">
+          <h3>Penny Lane · Strawberry Field · Cumpleaños de Vivi 🎂</h3>
+          <div class="day-date">13 de julio · La ruta Beatles + celebración especial</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno en el hotel — The Halyard</div>
+            <div class="item-desc">El Halyard tiene un desayuno muy bien valorado. Antes de salir hacia la ruta Beatles.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:00</span><span class="duration">20 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Hotel → Penny Lane</div>
+            <div class="item-desc">Uber ~15 min (£10-14) o taxi. Penny Lane está en el sur de Liverpool, fuera del centro.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:20</span><span class="duration">40 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🎵 Visita</div>
+            <div class="item-title">Penny Lane — La calle de la canción</div>
+            <div class="item-desc">La calle inmortalizada por los Beatles en 1967. La barbería, el banco, la rotonda. Todo sigue ahí igual que en la canción. Las señales de la calle son el souvenir más robado del mundo — las hacen de metal ahora.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:00</span><span class="duration">15 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Penny Lane → Strawberry Field</div>
+            <div class="item-desc">Uber ~10 min. Muy cerca entre sí.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:15</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🌿 Visita</div>
+            <div class="item-title">Strawberry Field — Los jardines de Lennon</div>
+            <div class="item-desc">Los jardines donde John Lennon jugaba de niño, la inspiración de "Strawberry Fields Forever". Ahora un centro de visitantes emocionante con exposición sobre su vida, cafetería y los icónicos portones rojos. Abre a las 10 AM.</div>
+            <div class="item-note">🎟️ Reservar entrada online en strawberryfieldliverpool.com. La exposición es muy emotiva y bien hecha.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🎂 Almuerzo especial — Cumpleaños de Vivi</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">11:30</span><span class="duration">20 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Strawberry Field → Albert Dock</div>
+            <div class="item-desc">Uber ~15 min de vuelta al dock para el almuerzo de celebración.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">12:00</span><span class="duration">2h</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🎂 Almuerzo Cumpleaños</div>
+            <div class="item-title">🎉 The Botanist — Albert Dock ⭐ 4.3</div>
+            <div class="item-desc">Restaurante con ambiente elegante y animado directamente en el Albert Dock. Cocina variada y de calidad, coctelería espectacular, ambiente muy festivo y relajado. Perfecto para celebrar el cumpleaños de Vivi sin que nadie se sienta presionado. Sin dress code estricto.</div>
+            <div class="item-note">📋 RESERVAR con antelación especificando que es un cumpleaños para 13 personas. Pedir algo especial para Vivi. thebotanist.com</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌆 Tarde libre y preparación</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">14:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🛍️ Tarde libre</div>
+            <div class="item-title">Tarde libre en Albert Dock y centro</div>
+            <div class="item-desc">Paseo tranquilo, tiendas de souvenirs Beatles, el Tate Liverpool o simplemente disfrutar del dock. Preparar maletas por la noche para la salida hacia Edimburgo mañana.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Noche</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena</div>
+            <div class="item-title">Cena ligera cerca del hotel</div>
+            <div class="item-desc">Tras el almuerzo de celebración, algo más ligero y tranquilo cerca del hotel. Bold Street tiene excelentes restaurantes independientes para todas las preferencias.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>⏱️ Salida mañana:</strong> Tren a las 11:20 AM desde Liverpool Lime Street → Edimburgo. Desayunar temprano y salir al hotel hacia las 10:30 AM.</div>
+      </div>
+    </div>
+
+    <!-- DÍA 3 LIVERPOOL - SALIDA -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">03</div>
+        <div class="day-info">
+          <h3>Salida hacia Edimburgo — Adiós Liverpool</h3>
+          <div class="day-date">14 de julio · Liverpool → Edimburgo</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno en el hotel — Check-out</div>
+            <div class="item-desc">Último desayuno en Liverpool. Check-out y recoger maletas. El tren sale a las 11:20 AM — hay tiempo tranquilo.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:30</span><span class="duration">20 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">The Halyard → Liverpool Lime Street</div>
+            <div class="item-desc">Uber con maletas ~10-15 min (£10-15). Llegar a la estación con 30-40 minutos de antelación.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">11:19</span><span class="duration">4h 20</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚆 Tren</div>
+            <div class="item-title">Liverpool Lime Street → Edimburgo Waverley</div>
+            <div class="item-desc">TransPennine Express. Vistas preciosas al cruzar los Pennines y los Borders escoceses. Llegada a Edimburgo ~15:39.</div>
+            <div class="item-note">✅ BOLETOS YA COMPRADOS · TransPennine Express · Salida 11:19 AM</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:39</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-hotel">🏰 Llegada</div>
+            <div class="item-title">Edimburgo Waverley — ¡Bienvenidos a Escocia!</div>
+            <div class="item-desc">La estación de Waverley está literalmente debajo del Castillo de Edimburgo. Primera vista de la ciudad al salir de la estación — impresionante.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>🏴󠁧󠁢󠁳󠁣󠁴󠁧 Siguiente parada:</strong> Edimburgo · 5 días en la capital de Escocia · Ver sección Escocia para el itinerario completo.</div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ══════════════════════════════════ SCOTLAND ══════════════════════════════════ -->
+<div class="destination scotland" id="dest-scotland">
+  <div class="dest-header">
+    <div class="flag">🏴󠁧󠁢󠁳󠁣󠁴󠁧</div>
+    <h2>Escocia, <em>Edimburgo & Highlands</em></h2>
+    <p class="dest-meta">Edimburgo · Fort William · Isle of Skye · Pitlochry · 14–22 julio</p>
+    <div class="dest-badge">9 días · Radisson Blu Edinburgh + Broadford Lodges + Fort William</div>
+  </div>
+
+  <main>
+
+    <!-- DÍA 1 EDIMBURGO -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">01</div>
+        <div class="day-info">
+          <h3>Llegada · Royal Mile · Victoria Street · Grassmarket</h3>
+          <div class="day-date">14 de julio · Primera tarde en Edimburgo</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">🚆 Llegada desde Liverpool</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:39</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚆 Llegada</div>
+            <div class="item-title">Edimburgo Waverley — Primera visión de la ciudad</div>
+            <div class="item-desc">Al salir de la estación el Castillo de Edimburgo aparece sobre el horizonte. Una de las llegadas más impresionantes de Europa.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:50</span><span class="duration">10 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Waverley → Radisson Blu Edinburgh · Royal Mile</div>
+            <div class="item-desc">A pie ~8 min subiendo por la Royal Mile. Uber/taxi £6-10 (5 min) con maletas. El hotel está literalmente en el Royal Mile.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">16:00</span><span class="duration">45 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-hotel">🏨 Hotel</div>
+            <div class="item-title">Radisson Blu Edinburgh — Check-in</div>
+            <div class="item-desc">Hotel 4 estrellas directamente en el Royal Mile, a metros del Castillo. Ubicación perfecta para explorar Edimburgo a pie. Descanso breve antes de salir.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🏰 Tarde — Old Town a pie</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">17:00</span><span class="duration">2h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🚶 Paseo</div>
+            <div class="item-title">Royal Mile · Victoria Street · Grassmarket · Gold Town House</div>
+            <div class="item-desc">El paseo más bonito de Edimburgo, todo a pie desde el hotel. La Royal Mile baja desde el Castillo hasta Holyrood con sus closes y wynd misteriosos. Victoria Street es la calle curva de colores inspiración de Diagon Alley de Harry Potter. El Grassmarket es el corazón del Old Town con pubs históricos y ambiente espectacular. El Gold Town House (Tolbooth) cierra el recorrido.</div>
+            <div class="item-note">💡 Este paseo dura lo que quieras — con niños puedes hacer 1h 30 min tranquilo. Es la mejor introducción a la ciudad y no cansa porque va cuesta abajo.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Primera cena en Edimburgo</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena</div>
+            <div class="item-title">Cena en el Grassmarket o Royal Mile</div>
+            <div class="item-desc">El Grassmarket tiene una selección excelente de pubs y restaurantes escoceses con ambiente animado. The Last Drop, Maggie Dickson's o White Hart Inn son clásicos del barrio. Julio es temporada alta — llegar antes de las 20:00 para encontrar mesa.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>💡 Nota:</strong> Día de llegada a las 15:39 — el recorrido a pie es perfecto para la primera tarde: no agota, orienta al grupo y presenta lo mejor del Old Town de golpe.</div>
+      </div>
+    </div>
+
+    <!-- DÍA 2 EDIMBURGO -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">02</div>
+        <div class="day-info">
+          <h3>Castillo de Edimburgo · Palacio de Holyroodhouse</h3>
+          <div class="day-date">15 de julio · La Royal Mile de principio a fin</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana — Castillo</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno en el hotel — Radisson Blu</div>
+            <div class="item-desc">Desayuno incluido. Salir puntual para llegar al Castillo a las 10:30 AM.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:30</span><span class="duration">2h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🏰 Visita</div>
+            <div class="item-title">Castillo de Edimburgo — Entrada a las 10:30 AM ✅</div>
+            <div class="item-desc">Las Joyas de la Corona escocesas, el Salón Real, la One O'Clock Gun (13:00h) y vistas panorámicas de 360° sobre la ciudad. Planea 2h 30 min para verlo con calma.</div>
+            <div class="item-note">✅ ENTRADA YA RESERVADA para las 10:30 AM. edinburghcastle.scot</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Almuerzo</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:00</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Almuerzo — Sin reserva</div>
+            <div class="item-title">Cannonball Restaurant o pubs del Royal Mile</div>
+            <div class="item-desc">Justo al salir del Castillo, el tramo alto del Royal Mile tiene excelentes opciones. Cannonball Restaurant tiene vistas directas al Castillo y cocina escocesa de calidad. Sin reserva al mediodía generalmente.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">The Witchery by the Castle</div>
+            <div class="item-desc">El restaurante más dramático y elegante de Edimburgo en una mansión del siglo XVI junto al Castillo. Cocina escocesa excepcional. Reservar con bastante antelación para 13 personas.</div>
+          </div>
+        </div>
+
+        <div class="section-label">👑 Tarde — Palacio de Holyroodhouse</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">14:15</span><span class="duration">5 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚶 A pie</div>
+            <div class="item-title">Royal Mile hacia Holyroodhouse</div>
+            <div class="item-desc">El Palacio está al final del Royal Mile, caminando cuesta abajo ~15 min desde el Castillo. El recorrido completo de la Royal Mile de principio a fin.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">14:30</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">👑 Visita</div>
+            <div class="item-title">Palacio de Holyroodhouse — Residencia real en Escocia</div>
+            <div class="item-desc">La residencia oficial del Rey en Escocia al final de la Royal Mile. Apartamentos de María Reina de Escocia, sala del trono, jardines reales y la abadía en ruinas. Audioguía incluida. Historia de traiciones y asesinatos reales fascinante.</div>
+            <div class="item-note">🎟️ Reservar en rct.uk. ~£18 adultos. Verificar horario — confirmar disponibilidad: a veces cierra por visitas reales.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌆 Tarde libre</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">16:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🛍️ Tarde libre</div>
+            <div class="item-title">Royal Mile de regreso — Closes, tiendas y souvenirs</div>
+            <div class="item-desc">De vuelta al hotel subiendo la Royal Mile — explorar los closes medievales, comprar tartán, whisky y shortbread. Victoria Street (Diagon Alley) si no se visitó ayer.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Cena</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena — Sin reserva</div>
+            <div class="item-title">The Last Drop o White Hart Inn — Grassmarket</div>
+            <div class="item-desc">Pubs históricos del Grassmarket con cocina escocesa tradicional. Ambiente animado y auténtico. Sin reserva — llegar antes de las 20:00 en julio.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">Wedgwood Restaurant — Royal Mile</div>
+            <div class="item-desc">Cocina escocesa contemporánea con ingredientes locales. Muy bien valorado y perfecto para una cena especial. Reservar para 13 personas.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>💡 Día 15:</strong> El Castillo y el Palacio están en los dos extremos del Royal Mile — el eje más histórico de Escocia. Un día épico y muy completo sin apenas traslados.</div>
+      </div>
+    </div>
+
+    <!-- DÍA 3 EDIMBURGO -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">03</div>
+        <div class="day-info">
+          <h3>Mary King's Close · Dean Village · Calton Hill · Greyfriars</h3>
+          <div class="day-date">16 de julio · La cara oculta y tranquila de Edimburgo</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">🕯️ Mañana temprana — Mary King's Close</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno en el hotel — Radisson Blu</div>
+            <div class="item-desc">Salir temprano para el primer turno de Mary King's Close antes de que se llene.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:00</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">👻 Visita</div>
+            <div class="item-title">The Real Mary King's Close — Turno 9:00-10:00 AM</div>
+            <div class="item-desc">Las calles subterráneas del siglo XVII selladas bajo el Royal Mile durante 300 años. Tour guiado de 1 hora por viviendas, tiendas y leyendas de la Edimburgo medieval. Oscuro, misterioso y fascinante para todas las edades.</div>
+            <div class="item-note">🎟️ RESERVAR turno 9:00-10:00 AM en realmarykingsclose.com. Las plazas para grupos grandes se agotan rápido. ~£18 adultos.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌿 Media mañana — Dean Village</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:15</span><span class="duration">20 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚶 Traslado</div>
+            <div class="item-title">Royal Mile → Dean Village</div>
+            <div class="item-desc">A pie ~25 min por Princes Street y Dean Bridge, o Uber £6-9 (10 min).</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:35</span><span class="duration">1h 15</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🌿 Paseo</div>
+            <div class="item-title">Dean Village — El pueblo escondido de Edimburgo</div>
+            <div class="item-desc">Pueblo molinero del siglo XII a 5 minutos del centro. Casas de piedra, el río Water of Leith, puentes cubiertos de musgo y jardines secretos. Completamente gratis. El contraste más bonito de Edimburgo — de las calles subterráneas medievales al pueblo más tranquilo y verde de la ciudad.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Almuerzo</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">12:00</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Almuerzo — Sin reserva</div>
+            <div class="item-title">The Stockbridge Restaurant area — cafés del barrio</div>
+            <div class="item-desc">El barrio de Stockbridge junto a Dean Village tiene cafés y restaurantes excelentes y auténticos. Nada turístico, muy local. Sin reserva necesaria al mediodía.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">12:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">The Scran & Scallie — Gastropub de Stockbridge</div>
+            <div class="item-desc">Gastropub de Tom Kitchin con cocina escocesa de calidad y ambiente relajado. Muy popular en Stockbridge. Reservar para grupos.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌅 Tarde — Calton Hill y Greyfriars</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:30</span><span class="duration">20 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚶 Traslado</div>
+            <div class="item-title">Stockbridge → Calton Hill</div>
+            <div class="item-desc">A pie ~25 min o Uber £6-8.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">14:00</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🌅 Mirador</div>
+            <div class="item-title">Calton Hill — El mejor mirador de Edimburgo</div>
+            <div class="item-desc">Subida fácil de 10 min. Vistas panorámicas al Castillo, Arthur's Seat, el Old Town y la costa del Forth. El Monumento Nacional de Escocia (las columnas griegas sin terminar) es icónico. Completamente gratis.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:15</span><span class="duration">20 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚶 Traslado</div>
+            <div class="item-title">Calton Hill → Greyfriars Kirkyard</div>
+            <div class="item-desc">Bajando hacia el Old Town ~20 min a pie.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:35</span><span class="duration">45 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🐕 Visita</div>
+            <div class="item-title">Greyfriars Kirkyard — Greyfriars Bobby</div>
+            <div class="item-desc">El cementerio más atmosférico de Escocia. La tumba de Greyfriars Bobby. Lápidas medievales e inspiración de personajes de Harry Potter. Gratis, siempre abierto.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Cena</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena — Sin reserva</div>
+            <div class="item-title">Maggie Dickson's — Grassmarket</div>
+            <div class="item-desc">Pub histórico del Grassmarket con nombre de una condenada a muerte que sobrevivió su propia ejecución. Historia fascinante, ambiente escocés auténtico, cocina clásica. Sin reserva.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">Ondine — Mariscos en el Old Town</div>
+            <div class="item-desc">El mejor restaurante de mariscos de Edimburgo. Langosta, vieiras y pescado fresco escocés en un ambiente elegante. Reservar con antelación.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>💡 Día 16:</strong> Mary King's Close temprano + Dean Village tranquilo + Calton Hill + Greyfriars. El día más variado — underground medieval, pueblo secreto, mejor mirador y cementerio histórico.</div>
+      </div>
+    </div>
+
+    <!-- DÍA 4 EDIMBURGO → DUNNOTTAR → PITLOCHRY -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">04</div>
+        <div class="day-info">
+          <h3>Dunnottar Castle → Pitlochry — Las Highlands comienzan</h3>
+          <div class="day-date">17 de julio · Salida de Edimburgo · Destino: Highlands</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana — Check-out y salida</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno en el hotel — Check-out</div>
+            <div class="item-desc">Último desayuno en Edimburgo. Check-out y maletas al carro. El castillo de Dunnottar no espera.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:00</span><span class="duration">1h 45</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Edimburgo → Dunnottar Castle (A90/A92 hacia Stonehaven)</div>
+            <div class="item-desc">~160 km por la costa este de Escocia. Ruta preciosa bordeando el Mar del Norte pasando por Dundee y Aberdeen. Paradas en miradores de la costa si el ánimo lo permite.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🏰 Dunnottar Castle</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:45</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🏰 Visita</div>
+            <div class="item-title">Dunnottar Castle — El castillo de acantilado</div>
+            <div class="item-desc">Uno de los castillos más dramáticos del mundo — ruinas medievales sobre un promontorio de roca de 50m sobre el Mar del Norte. Aquí se guardaron las Joyas de la Corona escocesas durante la invasión de Cromwell (1650). La caminata desde el parking es de 15-20 min por la costa. Vistas absolutamente brutales.</div>
+            <div class="item-note">✅ ENTRADA YA COMPRADA · Libre de horario entre 9:00 AM y 5:00 PM · Llegar cuando quieran dentro de ese rango.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Almuerzo</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">12:15</span><span class="duration">20 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Dunnottar → Stonehaven pueblo</div>
+            <div class="item-desc">2 km, 5 minutos en carro. Stonehaven es el pueblo pesquero junto al castillo.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">12:30</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🐟 Almuerzo</div>
+            <div class="item-title">Fish & Chips en Stonehaven</div>
+            <div class="item-desc">Stonehaven es famoso por tener uno de los mejores fish & chips de Escocia — la freidura The Bay Fish & Chips tiene fama nacional. Puerto pesquero precioso para comer junto al agua.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🏔️ Tarde — Hacia las Highlands</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:30</span><span class="duration">2h</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Stonehaven → Pitlochry (A90 → A93 → A9)</div>
+            <div class="item-desc">~160 km cruzando el corazón de Escocia. La A93 por el Balmoral Estate es uno de los recorridos más bonitos del país — castillos, brezales y las primeras vistas de las Highlands.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Llegada a Pitlochry</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-hotel">🏨 Hotel</div>
+            <div class="item-title">Westlands of Pitlochry — Check-in</div>
+            <div class="item-desc">Hotel en el corazón del pueblo de Pitlochry, la puerta de entrada a las Highlands. Paseo por el pueblo, la destilería Bell's y el río Tummel. Primer contacto con las Highlands de verdad.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">17:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🚶 Paseo</div>
+            <div class="item-title">Pitlochry — Pueblo y alrededores</div>
+            <div class="item-desc">El pueblito más encantador de Escocia central. Tiendas de tweed, confiterías, la escalera de peces del río Tummel, y vistas al Ben Vrackie de fondo. Perfecta introducción a la vida de las Highlands.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena</div>
+            <div class="item-title">Cena en Pitlochry</div>
+            <div class="item-desc">Moulin Inn o Pitlochry Festival Theatre Restaurant son excelentes. Ambiente escocés auténtico para la primera noche en las Highlands.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>⏱️ Conducción total:</strong> ~4h · El día más largo en carro dentro de Escocia, pero la ruta por la costa y el Balmoral lo hace muy llevadero. Mañana comienza el gran itinerario de las Highlands.</div>
+      </div>
+    </div>
+
+    <!-- DÍA 5 = DÍA 01 HIGHLANDS (antiguo DÍA 01 SCOTLAND) -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">05</div>
+        <div class="day-info">
+          <h3>Pitlochry → Cairngorms → Urquhart Castle → Skye</h3>
+          <div class="day-date">18 de julio · El gran día de las Highlands · Llegada a Isle of Skye</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno en el hotel — Pitlochry</div>
+            <div class="item-desc">Desayuno escocés completo antes de salir. El día más largo del viaje — carguen energía.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:00</span><span class="duration">15 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Pitlochry → Queen's View</div>
+            <div class="item-desc">13 km por la B8019 bordeando el Loch Tummel.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:15</span><span class="duration">45 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">👁️ Visita</div>
+            <div class="item-title">Queen's View — Loch Tummel</div>
+            <div class="item-desc">Mirador sobre el Loch Tummel con vistas al Schiehallion. Visitor Centre abre a las 10 AM. Cafetería disponible.</div>
+            <div class="item-note">⚠️ Parking de pago. Reservar online con antelación.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:00</span><span class="duration">~1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Queen's View → Cairngorms → Drumnadrochit (A9 norte)</div>
+            <div class="item-desc">Recorrido escénico por el Parque Nacional. Paradas en miradores — Kingussie, Newtonmore, Aviemore. Sin prisa.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Almuerzo</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:00</span><span class="duration">1h 15</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Almuerzo — Sin reserva</div>
+            <div class="item-title">Fiddlers Highland Restaurant — Drumnadrochit</div>
+            <div class="item-desc">El mejor restaurante de la zona del Loch Ness. Especialidad en carne escocesa, haggis y whisky. Con la entrada al castillo a las 3:30 PM hay tiempo de sobra para comer tranquilos.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">The Loch Ness Inn — Drumnadrochit</div>
+            <div class="item-desc">Pub gastropub con buena selección de whiskies y cocina escocesa. Reservar para 13 personas.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🏰 Tarde</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:15</span><span class="duration">10 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Drumnadrochit → Urquhart Castle</div>
+            <div class="item-desc">5 minutos por la A82 bordeando el Loch Ness.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:30</span><span class="duration">2h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🏰 Visita</div>
+            <div class="item-title">Urquhart Castle — Loch Ness</div>
+            <div class="item-desc">Ruinas medievales con vistas al Loch Ness. Grant Tower, película introductoria y audioguía. Última entrada a las 7:15 PM — tiempo de sobra para disfrutarlo con calma.</div>
+            <div class="item-note">✅ ENTRADA YA RESERVADA para las 3:30 PM · historicenvironment.scot · £14 adultos / £8.50 niños · Parking incluido.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">17:30</span><span class="duration">1h 45</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Urquhart Castle → Broadford Lodges Skye</div>
+            <div class="item-desc">A82 → Invermoriston → A87 → Puente de Skye → Broadford. Llegada ~19:15. En julio hay luz hasta las 10:30 PM — se llega de día perfectamente.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Noche</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:15</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-hotel">🏠 Alojamiento</div>
+            <div class="item-title">Broadford Lodges Skye — Check-in</div>
+            <div class="item-desc">Check-in desde las 4 PM. Lodges con cocina completa. Cena ligera en el pueblo de Broadford.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>⏱️ Conducción total:</strong> ~3h 15 min · Con la entrada al castillo a las 3:30 PM el día fluye sin prisas. En julio se llega de día a Skye perfectamente.</div>
+      </div>
+    </div>
+
+    <!-- DÍA 6 SCOTLAND -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">06</div>
+        <div class="day-info">
+          <h3>Eilean Donan Castle → Sligachan → Portree</h3>
+          <div class="day-date">19 de julio · Día cultural y tranquilo · Base: Broadford Lodges</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno en los lodges</div>
+            <div class="item-desc">Los lodges tienen cocina completa. Comprar provisiones en el Co-op de Broadford la noche anterior.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:00</span><span class="duration">45 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Broadford → Eilean Donan Castle</div>
+            <div class="item-desc">Cruzar el puente de Skye y A87 hacia Dornie. Paisaje espectacular.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:45</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🏰 Visita</div>
+            <div class="item-title">Eilean Donan Castle</div>
+            <div class="item-desc">El castillo más fotografiado de Escocia, sobre una isla donde se unen tres lochs. Abre a las 9:00 AM en verano.</div>
+            <div class="item-note">⚠️ Entradas SOLO en taquilla el día — sin reserva online. £13 adultos / £6.50 niños. Llegar antes de las 10 AM para evitar colas.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">11:15</span><span class="duration">45 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Eilean Donan → Sligachan</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Almuerzo</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">12:00</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍺 Almuerzo</div>
+            <div class="item-title">Sligachan Hotel & Pub</div>
+            <div class="item-desc">Pub clásico escocés con jardín enorme y vistas frontales a los Cuillins. Los niños pueden correr junto al río mientras los adultos disfrutan del paisaje.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:30</span><span class="duration">20 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Sligachan → Portree</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌊 Tarde libre — Portree</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:50</span><span class="duration">3h+</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🌊 Tarde libre</div>
+            <div class="item-title">Portree — Puerto colorido e icónico</div>
+            <div class="item-desc">El pueblo más fotogénico de Skye. Puerto con casitas de colores, tiendas de artesanía, heladerías y paseo tranquilo.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Cena y regreso</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:00</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena</div>
+            <div class="item-title">Cena en Portree</div>
+            <div class="item-desc">Varios restaurantes con vistas al puerto. Reservar con antelación para 13 personas.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">20:15</span><span class="duration">45 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Portree → Broadford Lodges</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>⏱️ Conducción total:</strong> ~2h 30 min · Día tranquilo, perfecto antes del más activo del viaje.</div>
+      </div>
+    </div>
+
+    <!-- DÍA 7 SCOTLAND -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">07</div>
+        <div class="day-info">
+          <h3>Old Man of Storr → Quiraing → Fort William</h3>
+          <div class="day-date">20 de julio · Día de senderismo · Salida de Skye</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">🌅 Salida estratégica muy temprana</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">7:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno rápido en los lodges</div>
+            <div class="item-desc">Preparar algo ligero. El objetivo es salir antes de las 8:00 AM para asegurar parking en el Storr.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:00</span><span class="duration">45 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Broadford → Old Man of Storr (A855)</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:45</span><span class="duration">2h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🧗 Senderismo</div>
+            <div class="item-title">Old Man of Storr</div>
+            <div class="item-desc">La caminata más icónica de Skye. Dos rutas: Discovery Route (izquierda, suave) o Direct Route (derecha, empinada). El Santuario de rocas basálticas con vistas al Sound of Raasay.</div>
+            <div class="item-note">⚠️ Solo 140 plazas de parking — se llena ANTES de las 10 AM. £5-6 por coche. Sin reserva posible. Botas impermeables imprescindibles.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">11:30</span><span class="duration">30 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Old Man of Storr → Quiraing (A855 norte)</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">12:00</span><span class="duration">2h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🏔️ Senderismo</div>
+            <div class="item-title">Quiraing</div>
+            <div class="item-desc">El paisaje más dramático de Escocia — acantilados, agujas de roca y praderas en los bordes. Caminata circular ~1h 30 min. Sentido antihorario recomendado.</div>
+            <div class="item-note">💡 Llevar snacks y agua. Puede estar muy embarrado. Botas imprescindibles.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Almuerzo</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">14:00</span><span class="duration">20 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Quiraing → The Hungry Gull (Staffin)</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">14:20</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Almuerzo</div>
+            <div class="item-title">The Hungry Gull — Staffin ⭐ 4.9</div>
+            <div class="item-desc">El restaurante mejor valorado del norte de Skye. Comida casera espectacular. Abre mar–sáb desde las 10 AM.</div>
+            <div class="item-note">⚠️ Cerrado lunes y domingos — verificar el día de la visita.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:20</span><span class="duration">2h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Staffin → Fort William</div>
+            <div class="item-desc">Costa este de Skye → Puente de Skye → A87 → A82 Fort William.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Noche en Fort William</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">18:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-hotel">🏨 Hotel</div>
+            <div class="item-title">Fort William — Check-in</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena</div>
+            <div class="item-title">The Highland Coo..k — Fort William ⭐ 4.8</div>
+            <div class="item-desc">Especialidad en haggis y cocina escocesa tradicional. La mejor cena de Fort William.</div>
+            <div class="item-note">📋 Reservar mesa para 13 personas con antelación.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>⏱️ Conducción total:</strong> ~4h · Día más intenso físicamente. Calzado impermeable y capas de abrigo imprescindibles.</div>
+      </div>
+    </div>
+
+    <!-- DÍA 8 SCOTLAND -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">08</div>
+        <div class="day-info">
+          <h3>Glenfinnan + Road to the Isles → Mallaig</h3>
+          <div class="day-date">21 julio · Fort William · Plan A/B Jacobite</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana — Salida hacia Glenfinnan</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno en el hotel</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:30</span><span class="duration">45 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Fort William → Glenfinnan (A830 — Road to the Isles)</div>
+            <div class="item-desc">25 km de paisaje espectacular por la Road to the Isles.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:15</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🎬 Visita</div>
+            <div class="item-title">Glenfinnan Viaduct + Monumento</div>
+            <div class="item-desc">El viaducto de Harry Potter sobre el Loch Shiel. Mirador superior, monumento a Bonnie Prince Charlie y café en el Visitor Centre. El Jacobite pasa a las 10:10 AM si opera.</div>
+            <div class="item-note">🎟️ Si el Jacobite opera: reservar en westcoastrailways.co.uk — verificar disponibilidad para julio 2026.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Almuerzo en Mallaig</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">11:45</span><span class="duration">45 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Glenfinnan → Mallaig (A830)</div>
+            <div class="item-desc">Playas blancas de Morar, vistas a las Hébridas Interiores.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">12:30</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🦞 Almuerzo</div>
+            <div class="item-title">Fish & Chips en Mallaig</div>
+            <div class="item-desc">Puerto pesquero auténtico — el pescado más fresco de la ruta. Paseo por el muelle con vistas a las Hébridas.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">14:00</span><span class="duration">1h 15</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Mallaig → Fort William</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Tarde y cena</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:15</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🏘️ Tarde libre</div>
+            <div class="item-title">Fort William — Cameron Square y tiendas</div>
+            <div class="item-desc">Paseo por el High Street, The Old Fort junto al loch y souvenirs escoceses.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:15</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🏛️ Opcional</div>
+            <div class="item-title">West Highland Museum <span class="optional">Opcional</span></div>
+            <div class="item-desc">Museo gratuito ⭐4.8 sobre la historia de las Highlands, Bonnie Prince Charlie y la WWII. Muy bien valorado — para quien tenga interés en la historia de la zona. Cerrado domingos.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena</div>
+            <div class="item-title">The Geographer — Fort William ⭐ 4.7</div>
+            <div class="item-desc">El restaurante más fino de Fort William. Cerrado lunes y domingos. Alternativa: Sónas Restaurant (todos los días).</div>
+            <div class="item-note">📋 Reservar con antelación para 13 personas.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>⏱️ Conducción total:</strong> ~3h · Día más relajado. Road to the Isles es una de las rutas más bellas de Escocia.</div>
+      </div>
+    </div>
+
+    <!-- DÍA 9 SCOTLAND -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">09</div>
+        <div class="day-info">
+          <h3>Glen Nevis — Steall Waterfall + Lower Falls</h3>
+          <div class="day-date">22 julio · Fort William · Día de naturaleza</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno en el hotel</div>
+            <div class="item-desc">Preparar ropa impermeable y calzado de montaña para las cascadas.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:30</span><span class="duration">15 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Fort William → Glen Nevis</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:45</span><span class="duration">2h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">💦 Senderismo</div>
+            <div class="item-title">Steall Waterfall — Nevis Gorge</div>
+            <div class="item-desc">La segunda cascada más alta de Escocia (120m). Caminata 1h ida y vuelta. Puente colgante de 3 cables — los adolescentes lo adorarán. Terreno irregular y húmedo.</div>
+            <div class="item-note">⚠️ Botas de montaña imprescindibles. No apto para calzado de calle. Parking de pago.</div>
+          </div>
+        </div>
+        <div class="section-label">🌆 Tarde y noche</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">12:15</span><span class="duration">15 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Glen Nevis → Fort William</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">12:30</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Almuerzo — Sin reserva</div>
+            <div class="item-title">Café Beag o The Grog & Gruel — Fort William</div>
+            <div class="item-desc">Opciones casuales en el centro de Fort William. Café Beag es pequeño y acogedor con buen café y comida casera. The Grog & Gruel es un pub clásico con buena comida sin reserva.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">12:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">The Garrison Restaurant — Fort William</div>
+            <div class="item-desc">Cocina escocesa de calidad en el centro de Fort William. Buenas opciones para grupos. Reservar con antelación.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:45</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🛍️ Tarde libre</div>
+            <div class="item-title">Fort William — Souvenirs y descanso</div>
+            <div class="item-desc">Treasures of the Earth, tiendas, o simplemente descanso antes de la jornada de mañana hacia Edimburgo. Preparar maletas por la noche.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena</div>
+            <div class="item-title">Cena de despedida — Fort William</div>
+            <div class="item-desc">The Highland Coo..k o The Geographer según cuál se usó el día anterior. Sónas Restaurant disponible todos los días.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>⏱️ Conducción total:</strong> ~45 min · Día muy tranquilo. Todo a 15 minutos del hotel. Preparar maletas por la noche.</div>
+      </div>
+    </div>
+
+    <!-- DÍA 10 SCOTLAND -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">10</div>
+        <div class="day-info">
+          <h3>Fort William → Glencoe → Edimburgo</h3>
+          <div class="day-date">23 julio · Día de regreso · Llegada a la capital</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Último desayuno en las Highlands</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno en el hotel — Check-out</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:00</span><span class="duration">45 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Fort William → Glencoe (A82 sur)</div>
+            <div class="item-desc">Una de las carreteras más dramáticas del mundo. Rannoch Moor, las Tres Hermanas, Bidean nam Bian. Ir despacio.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🏔️ Glencoe — El gran final</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:45</span><span class="duration">20 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">💧 Parada</div>
+            <div class="item-title">Meeting of Three Waters</div>
+            <div class="item-desc">Tres cascadas convergiendo entre montañas, al borde de la A82. 15-20 min sin esfuerzo.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:15</span><span class="duration">45 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🏔️ Mirador</div>
+            <div class="item-title">Glencoe Viewpoint — Las Tres Hermanas</div>
+            <div class="item-desc">El mirador más icónico del valle. La foto más dramática del viaje. Gratis.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">11:00</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🏛️ Visita</div>
+            <div class="item-title">Glencoe Visitor Centre — National Trust</div>
+            <div class="item-desc">Exposición gratuita sobre la Masacre de Glencoe (1692). Casa de turba histórica, café y tienda.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Último almuerzo en las Highlands</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">12:15</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">☕ Almuerzo</div>
+            <div class="item-title">Crafts & Things — Glencoe ⭐ 4.6</div>
+            <div class="item-desc">Café con artesanía local y vistas al valle. Bagels, sopas y tartas caseras. El cierre perfecto de las Highlands.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🏙️ Hacia Edimburgo</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:15</span><span class="duration">2h 45</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado final</div>
+            <div class="item-title">Glencoe → Edimburgo</div>
+            <div class="item-desc">A82 sur → Glasgow → M8/M9 → Edimburgo. Pasar por Loch Lomond si hay tiempo.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">16:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-hotel">🏰 Llegada</div>
+            <div class="item-title">Edimburgo — ¡Bienvenidos a la capital!</div>
+            <div class="item-desc">Check-in. Primer paseo por la Royal Mile, el Castillo, el Grassmarket. La ciudad más bella del Reino Unido os espera.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🏨 Llegada a Edimburgo — Noche de descanso</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">~16:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-hotel">🏨 Hotel</div>
+            <div class="item-title">DoubleTree by Hilton Edinburgh Airport — Check-in</div>
+            <div class="item-desc">Hotel directamente junto al aeropuerto. Perfecta ubicación para el vuelo de mañana a las 10:30 AM. Noche tranquila de descanso tras el largo día de conducción.</div>
+            <div class="item-note">⚠️ Salir hacia el aeropuerto mañana a las 8:30 AM como máximo para el vuelo de las 10:30 AM.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Cena y descanso</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena — Sin reserva</div>
+            <div class="item-title">Restaurante del DoubleTree o zona aeropuerto</div>
+            <div class="item-desc">Noche tranquila y relajada. El hotel tiene restaurante propio — lo más cómodo después del largo día de viaje desde Fort William.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">Restaurante cercano al aeropuerto</div>
+            <div class="item-desc">Si el grupo prefiere salir un momento, hay opciones en los alrededores del aeropuerto de Edimburgo. Nada lejos — es noche de descanso.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>💡 Noche de transición:</strong> Solo descansar, preparar maletas y dormir bien. Mañana vuela a Múnich. 🇩🇪</div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ══════════════════════════════════ MUNICH ══════════════════════════════════ -->
+<div class="destination munich" id="dest-munich">
+  <div class="dest-header">
+    <div class="flag">🇩🇪</div>
+    <h2>Múnich, <em>Baviera</em></h2>
+    <p class="dest-meta">Boutique Hotel Germania · 23–25 Julio · 2 noches</p>
+    <div class="dest-badge">2 días · Llegada desde Edimburgo</div>
+  </div>
+  <main>
+
+    <!-- DÍA 1 MUNICH -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">01</div>
+        <div class="day-info">
+          <h3>Llegada · Marienplatz · Dokumentationszentrum</h3>
+          <div class="day-date">23 de julio · Vuelo desde Edimburgo · Primera tarde en Múnich</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">✈️ Vuelo Edimburgo → Múnich</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">✈️ Vuelo</div>
+            <div class="item-title">EasyJet — Edimburgo → Múnich</div>
+            <div class="item-desc">Salida desde el Aeropuerto de Edimburgo. Vuelo de ~2h 30 min. Check-in desde el DoubleTree Edinburgh Airport la mañana anterior.</div>
+            <div class="item-note">⚠️ Salir del DoubleTree hacia el aeropuerto mínimo 2h antes — ~8:30 AM.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:45</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">✈️ Llegada</div>
+            <div class="item-title">Múnich Franz Josef Strauss Airport</div>
+            <div class="item-desc">Llegada a Múnich. Trámites de llegada y recogida de equipaje. El aeropuerto está a ~45 min del centro.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">~15:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚌 Traslado</div>
+            <div class="item-title">Aeropuerto → Boutique Hotel Germania</div>
+            <div class="item-desc">S-Bahn S1 o S8 directo al centro (~45 min, €13). O taxi/Uber ~50 min (€70-90) para el grupo con maletas. S-Bahn más económico para 13 personas.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">~15:30</span><span class="duration">30 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-hotel">🏨 Hotel</div>
+            <div class="item-title">Boutique Hotel Germania — Check-in</div>
+            <div class="item-desc">Check-in y descanso breve. Múnich es compacta y todo está cerca del centro.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🏛️ Tarde — Historia y casco antiguo</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">16:30</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🏛️ Visita</div>
+            <div class="item-title">NS-Dokumentationszentrum — Museo del Nazismo</div>
+            <div class="item-desc">El museo más importante de Múnich sobre el ascenso del nacionalsocialismo. Exposición cronológica muy bien curada en 5 plantas — desde los orígenes del nazismo hasta el fin de la guerra. Impactante y necesario. Ubicado justo donde estaba la sede del Partido Nazi.</div>
+            <div class="item-note">🎟️ €7 adultos, gratis menores de 18. Abre hasta las 7 PM. Reservar entrada online en ns-dokuzentrum-muenchen.de. Recomendado +12 años.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">18:00</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🚶 Paseo</div>
+            <div class="item-title">Marienplatz · Glockenspiel · Frauenkirche</div>
+            <div class="item-desc">La plaza central de Múnich con el famoso carillón Glockenspiel que toca a las 5 PM en verano. La Frauenkirche con sus torres gemelas. El Viktualienmarkt (mercado al aire libre) si aún está abierto. Primera impresión de la Baviera clásica.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Cena</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍺 Cena</div>
+            <div class="item-title">Hofbräuhaus — Sin reserva necesaria</div>
+            <div class="item-desc">La cervecería más famosa del mundo fundada en 1589. Mesas largas, música bávara en vivo, salchichas, pretzels y chucrut. Ambiente increíblemente animado y festivo — perfecto para la primera noche en Múnich. Los niños y adolescentes lo van a adorar.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">Augustiner-Keller — Jardín de cerveza</div>
+            <div class="item-desc">El jardín de cerveza más auténtico de Múnich bajo castaños centenarios. Cocina bávara tradicional más refinada. Reservar para grupos grandes.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>💡 Nota:</strong> Día de mucho viaje — aeropuerto + vuelo + traslado. El itinerario de tarde es ligero intencionalmente para no agotar al grupo.</div>
+      </div>
+    </div>
+
+    <!-- DÍA 2 MUNICH -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">02</div>
+        <div class="day-info">
+          <h3>Dachau (Opcional) · Compras · Englischer Garten</h3>
+          <div class="day-date">24 de julio · Día flexible — cada uno elige</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana — Dos planes según el grupo</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno en el hotel — Boutique Hotel Germania</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:00</span><span class="duration">3h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🕯️ Plan A — Opcional</div>
+            <div class="item-title">KZ-Gedenkstätte Dachau — Campo de Concentración <span class="optional">Opcional</span></div>
+            <div class="item-desc">El primer campo de concentración nazi (1933). Museo, barracones reconstruidos, crematorio y monumentos. Audioguía en español. Para quienes quieran ir — es una visita impactante y necesaria. S-Bahn S2 desde Hauptbahnhof, ~45 min.</div>
+            <div class="item-note">⚠️ Entrada gratuita. Abre 9 AM. Recomendado +12-13 años. Emocionalmente muy intenso. Para quienes prefieran no ir, ver Plan B.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:30</span><span class="duration">2h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🛍️ Plan B — Para quien prefiera quedarse</div>
+            <div class="item-title">Kaufingerstrasse · Marienplatz · Maximilianstrasse — Compras</div>
+            <div class="item-desc">Las tres calles comerciales más importantes de Múnich. Kaufingerstrasse es la calle peatonal principal con todas las marcas. Maximilianstrasse es la más lujosa. Marienplatz tiene mercadillo artesanal y recuerdos bávaros. Ambiente muy agradable para pasear y comprar tranquilos.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Almuerzo</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:00</span><span class="duration">1h 15</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🥨 Almuerzo — Sin reserva</div>
+            <div class="item-title">Viktualienmarkt — Mercado al aire libre</div>
+            <div class="item-desc">El mercado histórico de Múnich con puestos de comida bávara, quesos, embutidos y cervezas. Perfecto para comer sin prisas al aire libre. El grupo de Dachau se reúne aquí.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">Zum Franziskaner — Restaurante histórico (1363)</div>
+            <div class="item-desc">Una de las cervecerías más antiguas de Múnich. Cocina bávara refinada, ambiente tranquilo. Reservar con antelación para grupos.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌿 Tarde — Englischer Garten</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:00</span><span class="duration">2h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🌿 Paseo</div>
+            <div class="item-title">Englischer Garten — El parque más grande de Europa</div>
+            <div class="item-desc">Más grande que Central Park. El río Eisbach donde surfistas hacen olas artificiales en pleno centro — los niños y adolescentes quedan fascinados. Jardín de cerveza chino al aire libre, prados y lagos. La desconexión perfecta.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Última noche en Múnich</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena</div>
+            <div class="item-title">Chinesischer Turm — Sin reserva</div>
+            <div class="item-desc">El jardín de cerveza de la Torre China en el Englischer Garten. Mesas bajo los árboles, música en vivo y el ambiente más auténtico de Múnich. Sin reserva — se busca mesa.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">Spatenhaus an der Oper — Frente a la Ópera</div>
+            <div class="item-desc">Restaurante elegante y tradicional frente a la Ópera de Múnich. Cocina bávara sofisticada. Excelente para la última cena en Alemania. Reservar para 13 personas.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>💡 Nota:</strong> Mañana sale el tren a Zúrich a las 10:48 AM — preparar maletas esta noche y desayunar temprano.</div>
+      </div>
+    </div>
+
+    <!-- DÍA 3 MUNICH - SALIDA -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">03</div>
+        <div class="day-info">
+          <h3>Salida en tren hacia Zúrich — Adiós Baviera</h3>
+          <div class="day-date">25 de julio · Múnich → Zúrich → Lucerna</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">7:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno temprano en el hotel — Check-out</div>
+            <div class="item-desc">Último desayuno en Múnich. Check-out y maletas listas para salir a la estación.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:45</span><span class="duration">15 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚶 Traslado</div>
+            <div class="item-title">Hotel → München Hauptbahnhof</div>
+            <div class="item-desc">A pie o en metro ~10-15 min. Llegar con 30 min de antelación para 13 personas con maletas.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:48</span><span class="duration">3h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚆 Tren</div>
+            <div class="item-title">Múnich Hauptbahnhof → Zúrich HB</div>
+            <div class="item-desc">Tren directo EC/ICE por los Alpes bávaros. Paisaje espectacular cruzando la frontera hacia Suiza. Llegada a Zúrich ~14:18.</div>
+            <div class="item-note">✅ BOLETOS YA COMPRADOS · Salida 10:48 AM · Múnich Hauptbahnhof</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">~14:18</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚆 Conexión</div>
+            <div class="item-title">Zúrich HB — Conexión hacia Lucerna</div>
+            <div class="item-desc">Breve parada en Zúrich. La conexión al tren de Lucerna sale a las ~15:10.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:10</span><span class="duration">50 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚆 Tren</div>
+            <div class="item-title">Zúrich → Lucerna</div>
+            <div class="item-desc">Tren InterCity directo. 50 minutos de paisaje suizo precioso.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:51</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-hotel">🏨 Llegada</div>
+            <div class="item-title">Lucerna — ¡Bienvenidos a Suiza!</div>
+            <div class="item-desc">Llegada a la estación central de Lucerna, a pasos del lago y el casco antiguo.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>🇨🇭 Siguiente parada:</strong> Lucerna · 6 días en el corazón de Suiza · Ver pestaña Lucerna para el itinerario completo.</div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ══════════════════════════════════ LUCERNE ══════════════════════════════════ -->
+<div class="destination lucerne" id="dest-lucerne">
+  <div class="dest-header">
+    <div class="flag">🇨🇭</div>
+    <h2>Lucerna, <em>el corazón de Suiza</em></h2>
+    <p class="dest-meta">Cascada Boutique Hotel · 25–31 Julio · 6 noches</p>
+    <div class="dest-badge">6 días · Toboganes · Glaciares · Lagos · Alpes</div>
+  </div>
+  <main>
+
+    <!-- DÍA 1 LUCERNE -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">01</div>
+        <div class="day-info">
+          <h3>Llegada · Cascada Boutique Hotel · Casco Antiguo</h3>
+          <div class="day-date">25 de julio · Primera tarde en Lucerna · Día relajado</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">🚆 Llegada desde Múnich</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:51</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚆 Llegada</div>
+            <div class="item-title">Estación de Lucerna — Llegada desde Zúrich</div>
+            <div class="item-desc">La estación está en el borde del lago, con vistas inmediatas a las montañas. Una de las llegadas más bonitas de Suiza.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">16:00</span><span class="duration">15 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚶 Traslado</div>
+            <div class="item-title">Estación → Cascada Boutique Hotel</div>
+            <div class="item-desc">A pie o en taxi ~10-15 min. El hotel está en el casco antiguo.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">16:15</span><span class="duration">45 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-hotel">🏨 Hotel</div>
+            <div class="item-title">Cascada Boutique Hotel — Check-in</div>
+            <div class="item-desc">Descanso breve después del largo día de viaje. El hotel está en una ubicación privilegiada en Lucerna.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌉 Tarde — Casco Antiguo de Lucerna</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">17:00</span><span class="duration">2h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🚶 Paseo</div>
+            <div class="item-title">Puente de la Capilla · Casco Antiguo · Lago de los Cuatro Cantones</div>
+            <div class="item-desc">El Kapellbrücke es el puente de madera cubierto más antiguo de Europa (1333) con pinturas históricas en el interior. El casco medieval con sus fuentes pintadas y murallas. El lago con las montañas de fondo — vistas absolutamente espectaculares al atardecer.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Primera noche en Lucerna</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena — Sin reserva</div>
+            <div class="item-title">Rathaus Brauerei — Cervecería del Ayuntamiento</div>
+            <div class="item-desc">Cervecería artesanal en el edificio del Ayuntamiento histórico. Cocina suiza, ambiente relajado y muy local. Sin dress code.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">Restaurant Schiff — Terraza sobre el río Reuss</div>
+            <div class="item-desc">Cocina suiza tradicional con terraza sobre el río en pleno casco antiguo. Muy buenas vistas nocturnas al Puente de la Capilla iluminado. Reservar para 13 personas.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 2 LUCERNE - ENGELBERG BRUNNI -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">02</div>
+        <div class="day-info">
+          <h3>Engelberg — Brunni Tobogán 🛷 · Día relajado en las alturas</h3>
+          <div class="day-date">26 de julio · Mañana tranquila · Tobogán + Tarde libre en Lucerna</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana — Salida sin prisa</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno en el hotel</div>
+            <div class="item-desc">Desayuno tranquilo. Sin prisa — salida a las 10:00 AM.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:00</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚆 Traslado</div>
+            <div class="item-title">Lucerna → Engelberg</div>
+            <div class="item-desc">Tren directo desde la estación central de Lucerna hasta Engelberg. ~1 hora de paisaje alpino espectacular. Incluido con Swiss Travel Pass.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🛷 Tobogán Brunni</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">11:00</span><span class="duration">2h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🛷 Tobogán</div>
+            <div class="item-title">Engelberg Brunni — Summer Toboggan 660m 🎉</div>
+            <div class="item-desc">Subida en telecabina Brunni hasta la estación Ristis. Tobogán de 660 metros a través del Parque Alpino de Globi. Niños desde 3 años, solos desde 8 años. Parque de juegos acuáticos, tirolesas y zona de descanso. Hacer varias bajadas — el precio lo vale.</div>
+            <div class="item-note">🎟️ CHF 5 niños / CHF 13 por 3 bajadas adultos. Telecabina ~CHF 20 adultos. Abre 9:30 AM. Llevar ropa que se pueda mojar para los niños.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Almuerzo en la montaña</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:30</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Almuerzo — Sin reserva</div>
+            <div class="item-title">Berglodge Restaurant Ristis — En la montaña</div>
+            <div class="item-desc">Restaurante familiar junto al tobogán con vistas panorámicas a los Alpes. Comida suiza simple y rica. Sin reserva necesaria.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌆 Tarde — Regreso y Lucerna</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">14:30</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚆 Regreso</div>
+            <div class="item-title">Engelberg → Lucerna</div>
+            <div class="item-desc">Tren de regreso ~1 hora.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🛍️ Tarde libre</div>
+            <div class="item-title">Tarde libre en Lucerna</div>
+            <div class="item-desc">Paseo por el lago, heladería, compras de souvenirs o simplemente descanso. Mañana es el día de Titlis — conviene llegar descansados.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Noche</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena — Sin reserva</div>
+            <div class="item-title">Wirtshaus Taube — Cocina suiza casera</div>
+            <div class="item-desc">Restaurante familiar en el casco antiguo. Fondue, rösti y raclette auténticos. Sin dress code, ambiente muy relajado.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">Restaurant Galliker — Histórico desde 1856</div>
+            <div class="item-desc">El restaurante más tradicional de Lucerna. Fondue y cocina suiza clásica en ambiente del siglo XIX. Reservar con antelación para 13 personas.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>🛷 Día tranquilo:</strong> Salida a las 10 AM, tobogán Brunni 660m y tarde relajada en Lucerna. Mañana viene el día más espectacular — Monte Titlis.</div>
+      </div>
+    </div>
+
+    <!-- DÍA 3 LUCERNE - TITLIS -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">03</div>
+        <div class="day-info">
+          <h3>Monte Titlis — Glaciar · Cueva de Hielo · Cliff Walk 🏔️</h3>
+          <div class="day-date">27 de julio · El día más espectacular de Suiza</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana — Salida hacia Engelberg</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno en el hotel</div>
+            <div class="item-desc">Salir a las 9:00 AM para llegar a Engelberg y subir temprano al Titlis antes de las nubes de la tarde.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:00</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚆 Traslado</div>
+            <div class="item-title">Lucerna → Engelberg</div>
+            <div class="item-desc">Tren directo ~1 hora. Incluido con Swiss Travel Pass.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🏔️ Monte Titlis — 3.239m</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:00</span><span class="duration">4h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🏔️ Excursión</div>
+            <div class="item-title">Monte Titlis — Glaciar · Cueva de Hielo · Cliff Walk</div>
+            <div class="item-desc">El pico más alto fácilmente accesible desde Lucerna. Gondola rotativa única en el mundo hasta la cima (3.239m). Titlis Cliff Walk — el puente colgante más alto de Europa (500m de altura). Cueva de hielo 10 metros bajo un glaciar de 5.000 años. Nieve garantizada. Vistas de 360° a los Alpes suizos. Los niños pueden jugar en la nieve en pleno julio.</div>
+            <div class="item-note">🎟️ ~CHF 108 adultos / CHF 54 niños (6-15 años). Reservar en titlis.ch. LLEVAR ABRIGO — hace frío arriba incluso en julio. Gafas de sol imprescindibles.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Almuerzo en la cima</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:00</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Almuerzo</div>
+            <div class="item-title">Restaurants en la cima del Titlis — Sin reserva</div>
+            <div class="item-desc">Hay varios restaurantes en la estación de la cima. Almorzar con vistas a los Alpes a 3.239m — una experiencia irrepetible.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌆 Tarde — Regreso</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">14:30</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚆 Regreso</div>
+            <div class="item-title">Engelberg → Lucerna</div>
+            <div class="item-desc">Tren de regreso ~1 hora.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🛍️ Tarde libre</div>
+            <div class="item-title">Tarde libre en Lucerna</div>
+            <div class="item-desc">Descanso o paseo tranquilo por el lago. El grupo lo va a necesitar después del día de montaña.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Noche</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena — Sin reserva</div>
+            <div class="item-title">Rathaus Brauerei — Cervecería del Ayuntamiento</div>
+            <div class="item-desc">Cervecería artesanal en el Ayuntamiento histórico. Cocina suiza, ambiente relajado. Sin dress code.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">Restaurant Galliker — Histórico desde 1856</div>
+            <div class="item-desc">El restaurante más tradicional de Lucerna. Fondue y cocina suiza clásica. Reservar para 13 personas.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>🏔️ El día más épico de Suiza:</strong> Glaciar, cueva de hielo, puente colgante a 500m de altura y nieve en julio. Llevar abrigo aunque haga calor en Lucerna.</div>
+      </div>
+    </div>
+
+    <!-- DÍA 4 LUCERNE - LAUTERBRUNNEN -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">04</div>
+        <div class="day-info">
+          <h3>Lauterbrunnen — El Valle de las 72 Cascadas 🌊</h3>
+          <div class="day-date">28 de julio · Excursión día completo · El más fotogénico de Suiza</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana — Salida temprana</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">7:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno en el hotel</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:30</span><span class="duration">2h</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚆 Traslado</div>
+            <div class="item-title">Lucerna → Lauterbrunnen</div>
+            <div class="item-desc">Tren Lucerna → Interlaken Ost → Lauterbrunnen. ~2 horas. Paisaje que va siendo cada vez más dramático al entrar en el Oberland bernés.</div>
+            <div class="item-note">🎟️ Swiss Travel Pass cubre este trayecto. Sin él: ~CHF 30-40 por persona. Reservar asientos con antelación para grupos.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌊 Lauterbrunnen — El valle más bonito de Suiza</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:30</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🌊 Visita</div>
+            <div class="item-title">Staubbachfall — La cascada del pueblo</div>
+            <div class="item-desc">La cascada de 300 metros que cae directamente sobre el pueblo de Lauterbrunnen — una de las más altas de Europa. Se puede caminar hasta una gruta detrás de la cascada. Impresionante. Gratis.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">11:30</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🌊 Visita</div>
+            <div class="item-title">Trümmelbach Falls — Las cascadas subterráneas</div>
+            <div class="item-desc">10 cascadas glaciares dentro de la montaña accesibles por ascensor y pasarelas. El agua del glaciar Jungfrau corre aquí — hasta 20.000 litros por segundo. Única en el mundo. Los adolescentes y niños quedan absolutamente fascinados.</div>
+            <div class="item-note">🎟️ CHF 16 adultos / CHF 8 niños. Bus desde Lauterbrunnen ~5 min.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Almuerzo en el valle</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:00</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Almuerzo — Sin reserva</div>
+            <div class="item-title">Picnic o café en Lauterbrunnen</div>
+            <div class="item-desc">El pueblo tiene varios cafés y tiendas. Un picnic en el prado frente a las cascadas con las montañas de fondo es una experiencia irrepetible. Comprar provisiones en el supermercado Coop del pueblo.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">Hotel Restaurant Staubbach — Vistas a la cascada</div>
+            <div class="item-desc">Restaurante con terraza frente a la cascada Staubbachfall. Cocina suiza tradicional con la mejor vista del valle. Reservar para grupos.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🏔️ Tarde — Miradores opcionales</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">14:30</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🚡 Opcional</div>
+            <div class="item-title">Teleférico a Grütschalp o Mürren — Vista al valle (Opcional)</div>
+            <div class="item-desc">Desde Lauterbrunnen hay teleféricos que suben a pueblos sin coches con vistas épicas al valle. Mürren es un pueblo de postal en los Alpes accesible solo a pie o teleférico. Si el grupo tiene energía, es una de las experiencias más bonitas de Suiza.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">16:30</span><span class="duration">2h</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚆 Regreso</div>
+            <div class="item-title">Lauterbrunnen → Lucerna</div>
+            <div class="item-desc">Tren de regreso ~2 horas.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Noche</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">20:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena — Sin reserva</div>
+            <div class="item-title">Cena casual en Lucerna</div>
+            <div class="item-desc">Noche tranquila después del día de excursión. La zona de la estación y el lago tiene múltiples opciones para comer sin reserva.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>🌊 Lauterbrunnen</strong> inspiró a Tolkien para crear Rivendell en El Señor de los Anillos. Es el valle más fotogénico de Europa — llevar buen ánimo y memoria extra en el móvil.</div>
+      </div>
+    </div>
+
+    <!-- DÍA 5 LUCERNE - CIUDAD -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">05</div>
+        <div class="day-info">
+          <h3>Lucerna Ciudad — Lago · Monumentos · Compras 🛍️</h3>
+          <div class="day-date">29 de julio · Día tranquilo en la ciudad</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno tranquilo en el hotel</div>
+            <div class="item-desc">Día sin excursión de montaña — disfrutar del desayuno sin prisa.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:00</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🦁 Visita</div>
+            <div class="item-title">Monumento del León de Lucerna</div>
+            <div class="item-desc">El León de Thorvaldsen tallado en la roca viva — Mark Twain lo llamó "el monumento más triste y conmovedor del mundo". Jardín tranquilo y recogido. Gratis. Justo al lado hay un pequeño lago de reflexión muy zen.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">11:00</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🚢 Paseo</div>
+            <div class="item-title">Crucero por el Lago de los Cuatro Cantones</div>
+            <div class="item-desc">Barco de vapor histórico por el lago más bonito de Suiza. Vistas a los Alpes, pequeños pueblos en las orillas y el Rütli — el prado donde nació la Confederación Suiza en 1291. Una de las experiencias más suizas posibles. Incluido con Swiss Travel Pass.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Almuerzo</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">12:30</span><span class="duration">1h 15</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Almuerzo — Sin reserva</div>
+            <div class="item-title">Brasserie Bodu — Terraza junto al lago</div>
+            <div class="item-desc">Brasserie con terraza frente al lago. Cocina suiza e internacional. Sin dress code, ambiente relajado. Muy popular pero sin necesidad de reserva al mediodía.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">12:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">Restaurant Seebad Lido — Con vistas al lago</div>
+            <div class="item-desc">Restaurante con las mejores vistas al lago y a los Alpes. Cocina mediterránea. Reservar con antelación para 13 personas.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🛍️ Tarde — Compras suizas</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">14:00</span><span class="duration">3h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🛍️ Compras</div>
+            <div class="item-title">Compras en Lucerna — Relojes · Chocolate · Artesanía</div>
+            <div class="item-desc">Lucerna es famosa por sus tiendas de relojes suizos (Bucherer, Gübelin), chocolate artesanal, navajas suizas y bordados. La calle Schwanenplatz y Kapellgasse son las principales. El mercado semanal junto al río tiene productos locales increíbles.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Noche</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena — Sin reserva</div>
+            <div class="item-title">Zunfthouse zur Pfistern — Gremio histórico siglo XIV</div>
+            <div class="item-desc">Restaurante en un edificio gremial del siglo XIV junto al río. Cocina suiza clásica, ambiente medieval con vistas al Kapellbrücke iluminado por la noche. Sin reserva al mediodía; llamar el mismo día para la noche.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">Old Swiss House — Ambiente del siglo XVII</div>
+            <div class="item-desc">Restaurante histórico con decoración original del siglo XVII. El Wiener Schnitzel preparado en mesa es legendario. Muy especial para una noche en Lucerna. Reservar con antelación.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 6 LUCERNE - RIGI -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">06</div>
+        <div class="day-info">
+          <h3>Monte Rigi — La Reina de las Montañas 👑</h3>
+          <div class="day-date">30 de julio · Día tranquilo · Vistas al lago y los Alpes</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍳 Desayuno</div>
+            <div class="item-title">Desayuno en el hotel</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">9:30</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚢 Traslado</div>
+            <div class="item-title">Lucerna → Weggis (barco por el lago)</div>
+            <div class="item-desc">Barco desde el muelle de Lucerna hasta Weggis ~45 min. La forma más bonita de llegar — vistas al Rigi desde el agua. Incluido con Swiss Travel Pass.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:30</span><span class="duration">2h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">👑 Excursión</div>
+            <div class="item-title">Monte Rigi — 1.797 metros · La Reina de las Montañas</div>
+            <div class="item-desc">El tren de montaña más antiguo de Europa (1871) sube hasta la cima con vistas a 13 lagos y los Alpes en 360°. En días claros se ven 24 de los 26 cantones suizos. Senderos suaves para todas las edades. Quesería con degustación de queso suizo fresco. Ambiente tranquilo y contemplativo — muy diferente a los días de tobogán.</div>
+            <div class="item-note">🎟️ Incluido con Swiss Travel Pass. Sin él: ~CHF 72 adultos. Subir hasta Rigi Kulm (cima) para las mejores vistas.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🍽️ Almuerzo en la cumbre</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">12:30</span><span class="duration">1h</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🧀 Almuerzo</div>
+            <div class="item-title">Restaurant Rigi Kulm — En la cima a 1.797m</div>
+            <div class="item-desc">Almorzar en la cima con vistas a los Alpes suizos. Rösti, queso fresco y especialidades montañesas. Sin reserva necesaria — hay varios restaurantes en la cumbre. Una de esas comidas que no se olvidan.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌅 Tarde de regreso</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">14:00</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🚂 Bajada</div>
+            <div class="item-title">Bajada a Vitznau + barco de regreso a Lucerna</div>
+            <div class="item-desc">Bajar por el otro lado del Rigi hasta Vitznau en el tren histórico y tomar el barco de vuelta al lago hasta Lucerna. Una ruta circular completamente distinta a la subida.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">16:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🛍️ Tarde libre</div>
+            <div class="item-title">Tarde libre en Lucerna</div>
+            <div class="item-desc">Último paseo, compras pendientes, heladería o simplemente descanso junto al lago.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Noche</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena — Sin reserva</div>
+            <div class="item-title">La Terrasse — Terraza sobre el lago</div>
+            <div class="item-desc">Restaurante con terraza frente al lago. Cocina internacional y suiza. Ambiente relajado y vistas al atardecer sobre el agua. Sin dress code.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">Wirtshaus Galliker — Clásico lucernés desde 1856</div>
+            <div class="item-desc">El restaurante más auténtico de Lucerna. Cocina suiza de temporada, ambiente familiar. Reservar para grupos.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 7 LUCERNE - DÍA LIBRE -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">07</div>
+        <div class="day-info">
+          <h3>Día Libre — Repetir favorito · Descanso · Lago</h3>
+          <div class="day-date">31 de julio · Sin agenda fija · Disfrutar Lucerna</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Opciones para el día libre</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">A gusto</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🔄 Opción A</div>
+            <div class="item-title">Repetir Monte Titlis o Brunni — Los favoritos</div>
+            <div class="item-desc">Si alguien quiere repetir el tobogán de Brunni o el glaciar de Titlis, hoy es el día. Los niños casi siempre quieren repetir el tobogán.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">A gusto</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🏊 Opción B</div>
+            <div class="item-title">Baño en el lago — Lido de Lucerna</div>
+            <div class="item-desc">El Lido de Lucerna es el balneario público junto al lago con piscinas, trampolines y playa. Perfecto para un día de descanso activo con los niños. CHF 8-10 entrada.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">A gusto</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🛍️ Opción C</div>
+            <div class="item-title">Compras finales + café suizo</div>
+            <div class="item-desc">Últimas compras de souvenirs, chocolate, relojes. Degustación de queso fondue o raclette en un restaurante tranquilo. La tarde es libre para desempacar y preparar maletas para mañana.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Última cena en Lucerna</div>
+            <div class="item-title">Cena de despedida de Suiza</div>
+            <div class="item-desc">Elegir el restaurante favorito de la semana o probar uno nuevo. Mañana sale el tren a París a las 11:34 AM — preparar maletas esta noche.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>⏰ Salida mañana:</strong> Tren a París a las 11:34 AM desde Lucerna. Desayunar a las 8:00 AM y salir al hotel hacia las 10:30 AM. Preparar maletas esta noche.</div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ══════════════════════════════════ PARIS FINAL ══════════════════════════════════ -->
+<div class="destination paris2" id="dest-paris2">
+  <div class="dest-header">
+    <div class="flag">🎂</div>
+    <h2>París, <em>el gran final</em></h2>
+    <p class="dest-meta">Best Western The Blake Paris · 31 Julio – 2 Agosto · 2 noches</p>
+    <div class="dest-badge">2 días · Sacré Cœur · 🎂 Cumpleaños · Regreso a casa</div>
+  </div>
+  <main>
+
+    <!-- DÍA 1 PARIS FINAL -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">01</div>
+        <div class="day-info">
+          <h3>Llegada desde Lucerna · Sacré Cœur · Montmartre</h3>
+          <div class="day-date">31 de julio · De vuelta a París · Último destino</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">🚆 Llegada desde Lucerna</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">11:34</span><span class="duration">~4h</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">🚆 Tren</div>
+            <div class="item-title">Lucerna → París (TGV/ICE)</div>
+            <div class="item-desc">Tren de alta velocidad por los Alpes y Borgoña hacia París. Llegada a París Gare de Lyon o Gare de l'Est ~15:30-16:00.</div>
+            <div class="item-note">✅ BOLETOS YA COMPRADOS · Salida 11:34 AM · Lucerna</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">~16:00</span><span class="duration">30 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚇 Traslado</div>
+            <div class="item-title">Estación → Best Western The Blake Paris</div>
+            <div class="item-desc">Metro o Uber al hotel según la estación de llegada. El hotel está en el 6° arrondissement.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">~16:30</span><span class="duration">30 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-hotel">🏨 Hotel</div>
+            <div class="item-title">Best Western The Blake Paris — Check-in</div>
+            <div class="item-desc">Check-in y descanso breve. Última vez en París — hay que aprovechar la tarde.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🎨 Tarde — Montmartre y Sacré Cœur</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">17:30</span><span class="duration">2h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🎨 Paseo</div>
+            <div class="item-title">Sacré Cœur · Place du Tertre · Montmartre</div>
+            <div class="item-desc">La basílica blanca sobre la colina más alta de París con vistas panorámicas a toda la ciudad. Place du Tertre con los pintores en vivo. Las callejuelas empedradas de Montmartre — el barrio más romántico y bohemio de París. El Moulin Rouge al bajar. Perfecto para las últimas fotos del viaje.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Cena</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">20:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Cena — Sin reserva</div>
+            <div class="item-title">Le Consulat — Brasserie histórica de Montmartre</div>
+            <div class="item-desc">Una de las brasseries más fotogénicas de París, frecuentada por Picasso y Toulouse-Lautrec. Ambiente Belle Époque, cocina francesa clásica. Sin dress code. Quedarse en Montmartre para cenar tras el paseo.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">20:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">La Maison Rose — La casa más fotografiada de Montmartre</div>
+            <div class="item-desc">La casita rosa icónica de Montmartre. Cocina francesa tradicional, ambiente absolutamente parisino. Reservar con antelación — muy pequeño para 13 personas.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÍA 2 PARIS FINAL - CUMPLEAÑOS -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">02</div>
+        <div class="day-info">
+          <h3>🎂 ¡Feliz Cumpleaños! · Comida en Bouillon Pigalle · Compras</h3>
+          <div class="day-date">1 de agosto · Tu día especial en París 🎉</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Mañana — ¡Tu día!</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">7:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🥐 Desayuno de cumpleaños</div>
+            <div class="item-title">Desayuno especial en el hotel o boulangerie parisina</div>
+            <div class="item-desc">Empezar el día de cumpleaños con un desayuno tranquilo. Croissants, pain au chocolat y café au lait como los parisinos.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:00</span><span class="duration">1h 30</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">⚽ Opcional</div>
+            <div class="item-title">Tour Parc des Princes — Estadio del PSG <span class="optional">Opcional</span></div>
+            <div class="item-desc">Tour inmersivo del estadio del PSG — vestuarios, túnel de jugadores, palco VIP, sala de trofeos y borde del campo. Guía interactiva en tu móvil en español. ~1.5h. Para los aficionados al fútbol del grupo — el resto puede explorar la zona o esperar.</div>
+            <div class="item-note">🎟️ Reservar en stadiumtour.psg.fr · Slot: 10:00 AM · Abierto sábados 10 AM–5 PM · Gate L · Metro línea 9, Porte de Saint-Cloud. Salir ~11:30 AM hacia el Louvre para llegar al Café Marly puntual a la 1:00 PM.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">10:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🌿 Para quien no vaya al PSG</div>
+            <div class="item-title">Paseo libre — Jardines de las Tullerías o Le Marais</div>
+            <div class="item-desc">Los Jardines de las Tullerías están a pasos del Café Marly — perfecto para llegar relajados a la comida. Le Marais tiene boutiques y cafés preciosos para un paseo tranquilo.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">11:30</span><span class="duration">30 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚇 Traslado</div>
+            <div class="item-title">Parc des Princes → Café Marly (Louvre)</div>
+            <div class="item-desc">Metro línea 9 desde Porte de Saint-Cloud hasta Palais Royal-Musée du Louvre (~30 min). El grupo se reagrupa en el Café Marly a la 1:00 PM.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🎂 Comida de Cumpleaños — 1:00 PM</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">13:00</span><span class="duration">2h</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🎉 Comida Cumpleaños</div>
+            <div class="item-title">Café Marly — Bajo los arcos del Louvre 🎂</div>
+            <div class="item-desc">Brasserie parisina contemporánea bajo los arcos del Louvre con terraza frente a la Pirámide de cristal. Ambiente elegante pero completamente relajado — jeans y tenis perfectos. Cocina francesa clásica, aperitivos y una foto de cumpleaños con la Pirámide de fondo que nadie olvidará. €40-50 por persona aprox.</div>
+            <div class="item-note">📋 RESERVAR con antelación para 13 personas especificando que es un cumpleaños · cafe-marly.com · 93 Rue de Rivoli, bajo los arcos del Louvre</div>
+          </div>
+        </div>
+
+        <div class="section-label">🛍️ Tarde — Compras y último París</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">15:00</span><span class="duration">3h</span></div>
+          <div class="content-col">
+            <div class="item-type type-visit">🛍️ Compras</div>
+            <div class="item-title">Compras finales — Champs-Élysées · Le Marais · Galeries Lafayette</div>
+            <div class="item-desc">Las últimas compras del viaje. Champs-Élysées para las marcas grandes. Le Marais para boutiques independientes y vintage. Galeries Lafayette para los últimos souvenirs y la terraza con vistas a la Ópera Garnier. La última tarde en Europa.</div>
+          </div>
+        </div>
+
+        <div class="section-label">🌙 Última noche en Europa</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Última cena — Sin reserva</div>
+            <div class="item-title">Café de Flore o Les Deux Magots — Saint-Germain</div>
+            <div class="item-desc">Las dos brasseries más icónicas e históricas de París en Saint-Germain-des-Prés. Frecuentadas por Sartre, Picasso y Simone de Beauvoir. El cierre perfecto del viaje — champagne en una terraza parisina. Sin dress code, ambiente relajado aunque turístico.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">19:30</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🍽️ Alternativa — Con reserva</div>
+            <div class="item-title">Bouillon Chartier Montparnasse — Art Nouveau espectacular</div>
+            <div class="item-desc">Techo de vitral Art Nouveau, ambiente de 1900, cocina francesa clásica. Una de las brasseries más bellas de París. Reservar con antelación para el grupo.</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>✈️ Mañana:</strong> Vuelo a las 11:55 AM → salir del hotel a las 9:00 AM máximo. Preparar maletas esta noche. ¡Último desayuno en Europa mañana!</div>
+      </div>
+    </div>
+
+    <!-- DÍA 3 PARIS FINAL - SALIDA -->
+    <div class="day">
+      <div class="day-header">
+        <div class="day-number">03</div>
+        <div class="day-info">
+          <h3>Vuelo de regreso — París → Monterrey ✈️</h3>
+          <div class="day-date">2 de agosto · Au revoir Europa · À bientôt!</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="section-label">☀️ Última mañana en Europa</div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">7:00</span><span class="duration">—</span></div>
+          <div class="content-col">
+            <div class="item-type type-food">🥐 Último desayuno</div>
+            <div class="item-title">Desayuno temprano en el hotel — Check-out</div>
+            <div class="item-desc">El último desayuno del viaje. Check-out y maletas listas. 28 días increíbles llegan a su fin.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">8:30</span><span class="duration">45 min</span></div>
+          <div class="content-col">
+            <div class="item-type type-drive">🚗 Traslado</div>
+            <div class="item-title">Hotel → Aeropuerto Charles de Gaulle</div>
+            <div class="item-desc">RER B desde el centro ~45 min (€11.80). Uber para el grupo con maletas ~45-60 min (€60-90). Llegar al aeropuerto con mínimo 2h 30 min de antelación para un vuelo internacional con 13 personas.</div>
+            <div class="item-note">⚠️ Para 11:55 AM necesitan estar en el aeropuerto a las 9:15 AM máximo. Salir del hotel a las 8:30 AM.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-col"><span class="time">11:55</span><span class="duration">~11h</span></div>
+          <div class="content-col">
+            <div class="item-type type-transport">✈️ Vuelo</div>
+            <div class="item-title">París CDG → Monterrey MTY</div>
+            <div class="item-desc">El vuelo más largo del viaje de vuelta a casa. Llevan 28 días de aventura, 6 países, docenas de memorias y miles de fotos. Au revoir Europa — ¡hasta la próxima! 🌍</div>
+          </div>
+        </div>
+        <div class="day-notes"><strong>🎊 28 días · 7 destinos · 13 viajeros · Una aventura que nunca olvidarán.</strong> París 🇫🇷 · Londres 🇬🇧 · Liverpool 🎸 · Escocia 🏴󠁧󠁢󠁳󠁣󠁴󠁧 · Múnich 🇩🇪 · Lucerna 🇨🇭 · París 🎂</div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ══════════════════════════════════ FOOTER ══════════════════════════════════ -->
+<footer>
+  <p>🇫🇷 París · 🇬🇧 Londres · 🎸 Liverpool · 🏴󠁧󠁢󠁳󠁣󠁴󠁧 Escocia · 🇩🇪 Múnich · 🇨🇭 Lucerna · 🎂 París &nbsp;·&nbsp; <span>Europa 2026</span></p>
+  <p style="margin-top:8px; opacity:0.4; font-size:10px;">13 viajeros · 28 días · 5 Jul – 2 Ago 2026 · Los horarios son orientativos — viajen sin prisas ♥</p>
+</footer>
+
+<script>
+  function showDest(dest) {
+    document.querySelectorAll('.destination').forEach(d => d.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.className = 'tab-btn');
+    document.getElementById('dest-' + dest).classList.add('active');
+    document.getElementById('btn-' + dest).classList.add('active-' + dest);
+  }
+  showDest('paris');
+</script>
+</body>
+</html>
